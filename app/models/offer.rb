@@ -5,6 +5,6 @@ class Offer < ActiveRecord::Base
   belongs_to :listing,
     inverse_of: :offers
   has_many :equipment,
-    inverse_of: :offers,
+    inverse_of: :offer,
     dependent: :destroy
 end
