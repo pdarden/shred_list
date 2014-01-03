@@ -17,4 +17,8 @@ describe Listing do
   it { should belong_to(:user) }
 
   it { should belong_to(:state) }
+
+  it { should have_many(:equipments).dependent(:destroy) }
+
+  it { should have_many(:offers).dependent(:destroy) }
 end

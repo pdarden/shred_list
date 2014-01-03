@@ -7,4 +7,10 @@ class Listing < ActiveRecord::Base
     inverse_of: :listings
   belongs_to :state,
     inverse_of: :listings
+  has_many :equipment,
+    inverse_of: :listing,
+    dependent: :destroy
+  has_many :offers,
+    inverse_of: :listing,
+    dependent: :destroy
 end
