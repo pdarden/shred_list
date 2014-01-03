@@ -8,3 +8,4 @@
 Seeders::Categories.seed
 Seeders::Brands.seed
 Seeders::RidingStyles.seed
+Seeders::States.seed
