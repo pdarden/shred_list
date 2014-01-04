@@ -1,0 +1,8 @@
+<%= simple_form_for([@equipmentable, @equipment], url: new_listing_equipment_path) do |f| %>
+  <%= f.association :brand, collection: Brand.all %>
+  <%= f.association :category, collection: Category.all %>
+  <%= f.association :riding_style, collection: RidingStyle.all, as: :check_boxes %>
+  <%= f.input :original_price %>
+  <%= f.input :_destroy, as: :check_box, label: "Remove Equipment" %>
+  <p>Add Pictures</p>
+<% end %>

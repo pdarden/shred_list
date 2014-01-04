@@ -44,6 +44,7 @@ gem 'bootstrap-sass', '~> 3.0.3.0'
 gem 'haml'
 gem 'hirb'
 gem 'devise'
+gem 'simple_form'
 
 group :test, :development do
   gem 'rspec-rails'
