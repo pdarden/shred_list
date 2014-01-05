@@ -17,7 +17,9 @@ class Listing < ActiveRecord::Base
     inverse_of: :listing,
     dependent: :destroy
 
-  accepts_nested_attributes_for :equipment, reject_if: lambda { |a| a[:original_price].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :equipment,
+    reject_if: lambda { |a| a[:original_price].blank? },
+    allow_destroy: true
 
   def asking_price=(val)
     write_attribute :asking_price, standardize_numbers(val)

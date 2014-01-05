@@ -1,0 +1,18 @@
+listing show
+
+<div class="col-md-6">
+  <h4>Listing</h4>
+  <%= @equipmentable.title %>
+  <%= @equipmentable.description %>
+  <h4>Equipments:</h4>
+  <% @equipmentable.equipment.each do |equipment| %>
+    <%= equipment.brand.try(:name) %>
+    <%= equipment.category.try(:name) %>
+  <% end %>
+</div>
+
+<div class="col-md-6">
+  <%# want to show this to owner only %>
+  <h4>Add Equipment</h4>
+  <%= render 'equipment/form' %>
+</div>

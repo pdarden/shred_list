@@ -5,16 +5,13 @@ class ListingsController < ApplicationController
   end
 
   def show
-    @listing = Listing.find(params[:id])
-    @equipmentable = @listing
-    @equipments = @equipmentable.equipment
-    @equipment = Equipment.new
+    @equipmentable = Listing.find(params[:id])
+    @equipment = @equipmentable.equipment.build
   end
 
   def new
-    @listing = Listing.new
-    @equipmentable = @listing
-    @equipment = @equipmentable.equipment.build
+    @equipmentable = Listing.new
+    @equipment = Equipment.new
   end
 
   def edit
@@ -23,6 +20,7 @@ class ListingsController < ApplicationController
 
   def create
     @listing = Listing.new(listing_params)
+    @listing.user = current_user
 
     if @listing.save
       redirect_to listing_path(@listing),

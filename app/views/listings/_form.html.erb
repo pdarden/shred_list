@@ -1,5 +1,5 @@
 <div class="col-md-6">
-  <%= simple_form_for(@listing, html: { class: "form-vertical" }) do |f| %>
+  <%= simple_form_for(@equipmentable, html: { class: "form-vertical" }) do |f| %>
     <%= f.input :title, autofocus: true %>
     <%= f.input :description, as: :text %>
     <%= f.collection_radio_buttons :trade, [[false, 'Sell'], [true, 'Trade']], :first, :last, item_wrapper_class: 'radio-inline' %>
@@ -13,10 +13,12 @@
     </div>
     <%= f.input :asking_items, label: "Asking Items", as: :text %>
 </div>
+<% if false %>
 <div class="col-md-6">
   <h4>Add Equipment</h4>
   <%= render 'equipment/form' %>
 </div>
+<% end %>
 <div class="col-md-8">
   <%= f.submit "Add Listing" %>
   <% end %>
