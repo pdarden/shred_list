@@ -24,7 +24,6 @@ feature 'Authenticated user signs in and post a listing', %Q{
     visit root_path
     click_link 'Sell | Trade'
     current_path.should == new_listing_path
-    #save_and_open_page
     expect(page).to have_content 'Create New Listing'
     expect(page).to have_content 'Title'
     expect(page).to have_content 'Description'
@@ -32,7 +31,6 @@ feature 'Authenticated user signs in and post a listing', %Q{
     expect(page).to have_content 'Trade'
     expect(page).to have_content 'Asking Price'
     expect(page).to have_content 'Asking Items'
-    expect(page).to have_content 'Add Equipment'
     Warden.test_reset!
   end
 
@@ -50,27 +48,28 @@ feature 'Authenticated user signs in and post a listing', %Q{
     category = Category.create(name: 'Completes')
     visit new_listing_path
     user_listing = FactoryGirl.build(:listing, user_id: user.id, asking_price: '200.37')
-    user_equipment = FactoryGirl.build(:equipment, listing_id: user_listing.id)
 
     fill_in 'Title', with: user_listing.title
     fill_in 'Description', with: user_listing.description
     choose('Sell')
     select state.name, from: 'listing_state_id'
     fill_in 'Asking Price', with: user_listing.asking_price
+    save_and_open_page
 
-    click_button 'Add Equipment'
+    click_button 'Add Listing'
+    expect(page).to have_content user_listing.title
+
+    click_link 'New Equipment'
     expect(page).to have_content 'Add Picture'
-    fill_in 'Original Price', with: user_equipment.orginal_price
+    fill_in 'Original Price', with: 238.45
     select brand.name, from: 'equipment_brand_id'
     select category.name, from: 'equipment_category_id'
-    check(user_equipment.riding_style_id.name)
-    click_button 'Add Listing'
-
+    check 'Downhill'
+    click_button 'Create Equipment'
     expect(page).to have_content user_listing.title
-    expect(page).to have_content user_equipment.original_price
+    expect(page).to have_content '$238.45'
   end
 
   scenario 'authenticated user creates a listing without all required fields'
 
-  scenario 'authenticated user creates a listing with pictures of equipments'
 end

@@ -5,13 +5,11 @@ class ListingsController < ApplicationController
   end
 
   def show
-    @equipmentable = Listing.find(params[:id])
-    @equipment = @equipmentable.equipment.build
+    @listing = Listing.find(params[:id])
   end
 
   def new
-    @equipmentable = Listing.new
-    @equipment = Equipment.new
+    @listing = Listing.new
   end
 
   def edit
@@ -19,6 +17,7 @@ class ListingsController < ApplicationController
   end
 
   def create
+    binding.pry
     @listing = Listing.new(listing_params)
     @listing.user = current_user
 
@@ -37,7 +36,7 @@ class ListingsController < ApplicationController
       redirect_to listing_path(@listing),
         notice: "Shred Listing was updated!"
     else
-      render action: 'edit'
+      render :edit
     end
   end
 

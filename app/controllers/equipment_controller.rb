@@ -6,7 +6,7 @@ class EquipmentController < ApplicationController
   end
 
   def new
-    @equipment = @equipmentable.build_equipment
+    @equipment = @equipmentable.equipment.new
   end
 
   def edit

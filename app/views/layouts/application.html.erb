@@ -8,15 +8,18 @@
 </head>
 <body>
 
-  <%= render partial: 'shared/nav' %>
+  <%= render 'shared/nav' %>
 
   <% flash.each do |name, msg| -%>
-    <%= content_tag :div, msg, class: name %>
+    <%= content_tag :div, msg, class: "#{name} alert alert-info alert-dismissable" %>
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
   <% end -%>
 
-<div class="container">
-  <%= yield %>
-</div>
+  <div class="container">
+    <%= yield %>
+  </div>
+
+  <%= render 'shared/footer' %>
 
 </body>
 </html>

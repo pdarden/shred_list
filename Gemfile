@@ -57,11 +57,17 @@ group :test, :development do
   gem 'nyan-cat-formatter'
 end
 
+group :test do
+  gem 'email_spec'
+end
+
 group :development do
   gem 'quiet_assets'
   gem 'meta_request'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'mailcatcher'
+  gem 'rails-erd'
 end
 
 group :production do

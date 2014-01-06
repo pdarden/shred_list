@@ -1,6 +1,14 @@
 <div class="row">
   <h1 class='text-center'>Create New Listing</h1>
-  <%= render 'form' %>
+  <div class="alert alert-info alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <h3>Sell or trade your equipment(s) in 2 easy steps!</h3>
+    <ol class="info">
+      <li>Add details of the listing.</li>
+      <li>Add details of your equipment(s) on the next page.</li>
+    </ol>
+  </div>
+    <%= render 'form' %>
 </div>
 <script>
   $(document).ready(function() {

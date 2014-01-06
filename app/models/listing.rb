@@ -17,17 +17,22 @@ class Listing < ActiveRecord::Base
     inverse_of: :listing,
     dependent: :destroy
 
-  accepts_nested_attributes_for :equipment,
-    reject_if: lambda { |a| a[:original_price].blank? },
-    allow_destroy: true
+  #accepts_nested_attributes_for :equipment,
+    #reject_if: lambda { |a| a[:original_price].blank? },
+    #allow_destroy: true
 
   def asking_price=(val)
-    write_attribute :asking_price, standardize_numbers(val)
+    standardize_numbers(val)
   end
 
   def standardize_numbers(num)
-    if num.to_s.match('.')
+    if num.to_s.match('$')
+      num.to_s.sub!('$', '')
+    end
+    if num.to_s.match(/[.]\d{2}\z/)
       num.to_s.sub!('.', '').to_i * 100
+    elsif num.to_s.match(/[.]\d{1}\z/)
+      num>to_s.sub!('.', '').to_i * 10
     else
       num.to_i * 100
     end
@@ -35,6 +40,10 @@ class Listing < ActiveRecord::Base
 
   def price_in_dollars
     (asking_price.to_f / 100).round(2)
+  end
+
+  def owned_by?(viewer)
+    self.user_id == viewer.id
   end
 
 end

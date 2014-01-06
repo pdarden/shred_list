@@ -1,18 +1,17 @@
-listing show
+<div class="col-md-6">
+  <h1><%= @listing.title %></h1>
+  <%= @listing.description %>
+</div>
 
 <div class="col-md-6">
-  <h4>Listing</h4>
-  <%= @equipmentable.title %>
-  <%= @equipmentable.description %>
   <h4>Equipments:</h4>
-  <% @equipmentable.equipment.each do |equipment| %>
+  <% @listing.equipment.each do |equipment| %>
     <%= equipment.brand.try(:name) %>
     <%= equipment.category.try(:name) %>
+    <%= link_to 'Edit', edit_listing_equipment_path %>
+  <% end %>
+  <% if @listing.owned_by?(current_user) %>
+    <%= link_to 'New Equipment', new_listing_equipment_path(@listing) %>
   <% end %>
 </div>
 
-<div class="col-md-6">
-  <%# want to show this to owner only %>
-  <h4>Add Equipment</h4>
-  <%= render 'equipment/form' %>
-</div>
