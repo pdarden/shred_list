@@ -1,5 +1,5 @@
 class EquipmentController < ApplicationController
-  before_filter :load_equipmentable
+  before_filter :load_equipmentable, :authenticate_user!
 
   def index
     @equipment = @equipmentable.equipment

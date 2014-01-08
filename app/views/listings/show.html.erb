@@ -2,7 +2,7 @@
   <h1><%= @listing.title %></h1>
   <p><strong>Description:</strong> <%= @listing.description %></p>
   <% if !@listing.asking_price.nil? %>
-    <p><strong>Asking price:</strong> <%= @listing.price_in_dollars %></p>
+    <p><strong>Asking price:</strong> $<%= @listing.price_in_dollars %></p>
   <% end %>
   <% if !@listing.asking_items.nil? && @listing.trade%>
     <p><strong>Asking items:</strong> <%= @listing.asking_items %></p>
@@ -16,7 +16,7 @@
   <% @listing.equipment.each do |equipment| %>
     <strong>Brand:</strong> <%= equipment.brand.try(:name) %><br>
     <strong>Category:</strong> <%= equipment.category.try(:name) %><br>
-    <strong>Original Price:</strong> <%= equipment.price_in_dollars %><br>
+    <strong>Original Price:</strong> $<%= equipment.price_in_dollars %><br>
     <strong>Riding Style:</strong> <%= equipment.riding_style.try(:name) %><br>
      <%= link_to 'Show', listing_equipment_path(@listing, equipment) %>
     <% if @listing.owned_by?(current_user) %>

@@ -9,5 +9,9 @@ FactoryGirl.define do
     state_id 1
     asking_price 20000
     asking_items "none"
+
+    trait :invalid_asking_price do
+      asking_price '$200.35'
+    end
   end
 end

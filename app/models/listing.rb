@@ -22,10 +22,11 @@ class Listing < ActiveRecord::Base
   end
 
   def price_in_dollars
-    "$#{'%.2f' % (asking_price.to_d / 100) if asking_price}"
+    "#{'%.2f' % (asking_price.to_d / 100) if asking_price}"
   end
 
   def price_in_dollars=(dollars)
+    dollars = dollars.to_s.gsub(/[^0-9\.]+/, '')
     self.asking_price = dollars.to_d * 100 if dollars.present?
   end
 end
