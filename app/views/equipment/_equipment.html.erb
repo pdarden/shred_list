@@ -2,6 +2,6 @@
   <strong>Brand:</strong> <%= e.brand.try(:name) %><br>
   <strong>Category: </strong> <%= e.category.try(:name) %><br>
   <strong>Riding Style: </strong> <% e.riding_style.try(:name)  %><br>
-  <strong>Original Price: </strong>$<%= e.original_price %><br>
+  <strong>Original Price: </strong><%= e.price_in_dollars %><br>
   <hr>
 <% end %>

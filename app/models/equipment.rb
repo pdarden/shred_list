@@ -13,4 +13,11 @@ class Equipment < ActiveRecord::Base
   has_many :pictures,
     dependent: :destroy
 
+  def price_in_dollars
+    "$#{'%.2f' % (original_price.to_d / 100) if original_price}"
+  end
+
+  def price_in_dollars=(dollars)
+    self.original_price = dollars.to_d * 100 if dollars.present?
+  end
 end

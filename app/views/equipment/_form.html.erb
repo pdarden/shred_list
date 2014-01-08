@@ -2,6 +2,6 @@
   <%= f.association :brand, collection: Brand.all %>
   <%= f.association :category, collection: Category.all %>
   <%= f.association :riding_style, collection: RidingStyle.all %>
-  <%= f.input :original_price, label: 'Original Price', as: :decimal %>
+  <%= f.input :price_in_dollars, label: 'Original Price' %>
   <%= f.submit "Create Equipment" %>
 <% end %>

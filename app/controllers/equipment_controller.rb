@@ -20,7 +20,7 @@ class EquipmentController < ApplicationController
   end
 
   def update
-    @equipment = @equipmentable.equipment.find(equipment_params)
+    @equipment = Equipment.find(params[:id])
 
     if @equipment.update(equipment_params)
       redirect_to @equipmentable,
@@ -54,6 +54,6 @@ class EquipmentController < ApplicationController
   end
 
   def equipment_params
-    params.require(:equipment).permit(:brand_id, :category_id, :riding_style_id, :original_price)
+    params.require(:equipment).permit(:brand_id, :category_id, :riding_style_id, :price_in_dollars)
   end
 end

@@ -21,4 +21,11 @@ class Listing < ActiveRecord::Base
     self.user_id == viewer.id
   end
 
+  def price_in_dollars
+    "$#{'%.2f' % (asking_price.to_d / 100) if asking_price}"
+  end
+
+  def price_in_dollars=(dollars)
+    self.asking_price = dollars.to_d * 100 if dollars.present?
+  end
 end

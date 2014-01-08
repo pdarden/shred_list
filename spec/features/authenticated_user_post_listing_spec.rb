@@ -73,6 +73,7 @@ feature 'Authenticated user signs in and post a listing', %Q{
     click_link 'Back to listing'
 
     expect(page).to have_content user_listing.title
+    save_and_open_page
     expect(page).to have_content '$200.37'
     expect(page).to have_content 'New Equipment'
 
