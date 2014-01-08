@@ -3,11 +3,7 @@
   <%= f.input :description, as: :text %>
   <%= f.collection_radio_buttons :trade, [[false, 'Sell'], [true, 'Trade']], :first, :last, item_wrapper_class: 'radio-inline' %>
   <%= f.association :state, collection: State.all %>
-  <%= f.input :asking_price, as: :integer %>
-  <div class="form-group">
-    <label for="price_input">Asking Price</label>
-    <input type="text" class="form-control" id="price_input">
-  </div>
+  <%= f.input :asking_price, label: "Asking Price", as: :decimal %>
   <%= f.input :asking_items, label: "Asking Items", as: :text %>
   <%= f.submit "Add Listing" %>
 <% end %>

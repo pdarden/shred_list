@@ -46,6 +46,7 @@ feature 'Authenticated user signs in and post a listing', %Q{
     state = State.create(name: 'Connecticut')
     brand = Brand.create(name: 'Loaded')
     category = Category.create(name: 'Completes')
+    riding_style = RidingStyle.create(name: 'Downhill')
     visit new_listing_path
     user_listing = FactoryGirl.build(:listing, user_id: user.id, asking_price: '200.37')
 
@@ -54,22 +55,31 @@ feature 'Authenticated user signs in and post a listing', %Q{
     choose('Sell')
     select state.name, from: 'listing_state_id'
     fill_in 'Asking Price', with: user_listing.asking_price
-    save_and_open_page
 
     click_button 'Add Listing'
     expect(page).to have_content user_listing.title
 
     click_link 'New Equipment'
-    expect(page).to have_content 'Add Picture'
-    fill_in 'Original Price', with: 238.45
+    fill_in 'Original Price', with: user_listing.asking_price
     select brand.name, from: 'equipment_brand_id'
     select category.name, from: 'equipment_category_id'
-    check 'Downhill'
+    check riding_style.name
     click_button 'Create Equipment'
+
     expect(page).to have_content user_listing.title
-    expect(page).to have_content '$238.45'
+    expect(page).to have_content '$200.37'
+    expect(page).to have_content 'New Equipment'
+
+
+
+    Warden.test_reset!
   end
 
-  scenario 'authenticated user creates a listing without all required fields'
+  scenario 'authenticated user creates a listing without all required fields' do
+    visit new_listing_path
+    click_button 'Add Listing'
+
+    expect(page).to have_content "can't be blank"
+  end
 
 end

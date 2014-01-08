@@ -9,6 +9,12 @@ class EquipmentController < ApplicationController
     @equipment = @equipmentable.equipment.new
   end
 
+  def show
+    @equipment = @equipmentable.equipment.find(params[:id])
+    @picture = Picture.new
+    @pictures = @equipment.pictures
+  end
+
   def edit
     @equipment = @equipmentable.equipment.find(params[:id])
   end
@@ -16,7 +22,7 @@ class EquipmentController < ApplicationController
   def update
     @equipment = @equipmentable.equipment.find(equipment_params)
 
-    if @equipment.update(params[:equipment])
+    if @equipment.update(equipment_params)
       redirect_to @equipmentable,
         notice: "Updated equipment successfully!"
     else
@@ -28,10 +34,9 @@ class EquipmentController < ApplicationController
     @equipment = @equipmentable.equipment.new(equipment_params)
 
     if @equipment.save
-      redirect_to @equipmentable,
+      redirect_to listing_equipment_path(@equipmentable, @equipment),
         notice: "You added an equipment!"
     else
-      flash.now[:notice] = "There was an issue with your equipment. Please try again."
       render :new
     end
   end

@@ -1,0 +1,25 @@
+<h1>Equipment Info</h1>
+
+<div class="col-md-4">
+  <strong>Brand:</strong> <%= @equipment.brand.name %><br>
+  <strong>Category: </strong> <%= @equipment.category.name %><br>
+  <% if !@equipment.riding_style.nil? %>
+    <strong>Riding Style: </strong> <% @equipment.riding_style.each { | style| "#{style.name} "}  %><br>
+  <% end %>
+  <strong>Original Price: </strong>$<%= '%.2f' % @equipment.original_price %><br>
+
+  <div class="add_photo">
+    <%= simple_form_for([@equipment, @picture], controller: :pictures, method: :create, action: :create, html: { multipart: true }) do |f| %>
+      <%= f.input :image, as: :file %>
+      <%= f.submit "Add Picture" %>
+    <% end %>
+  </div>
+
+  <%= link_to 'Back to listing', listing_path(@equipmentable) %>
+</div>
+
+<div class="col-md-8">
+  <% @pictures.each do |picture| %>
+    <%= image_tag picture.image_url(:thumb).to_s %>
+  <% end %>
+</div>

@@ -1,7 +1,13 @@
-<div id="well">
-  <% @equipments.each do |equipment| %>
-    <div>
-      <%= simple_format equipment.original_price %>
-    </div>
+<% @equipment.each do |e| %>
+  <% if !e.brand.nil? %>
+    <strong>Brand:</strong> <%= e.brand.name %><br>
   <% end %>
-</div>
+  <% if !e.category.nil? %>
+    <strong>Category: </strong> <%= e.category.name %><br>
+  <% end %>
+  <% if !e.riding_style.nil? %>
+    <strong>Riding Style: </strong> <% e.riding_style.each { | style| "#{style.name} "}  %><br>
+  <% end %>
+  <strong>Original Price: </strong>$<%= e.original_price %><br>
+  <hr>
+<% end %>

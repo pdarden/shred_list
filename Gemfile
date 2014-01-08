@@ -45,6 +45,10 @@ gem 'haml'
 gem 'hirb'
 gem 'devise'
 gem 'simple_form'
+gem 'carrierwave'
+gem 'nested_form'
+gem 'mini_magick'
+gem "fog", "~> 1.3.1"
 
 group :test, :development do
   gem 'rspec-rails'
@@ -55,6 +59,7 @@ group :test, :development do
   gem 'shoulda-matchers'
   gem 'capybara'
   gem 'nyan-cat-formatter'
+  gem 'dotenv-rails'
 end
 
 group :test do

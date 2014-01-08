@@ -6,7 +6,5 @@ FactoryGirl.define do
     category_id 2
     riding_style_id 1
     original_price 15000
-    offer_id ''
-    listing_id 1
   end
 end
