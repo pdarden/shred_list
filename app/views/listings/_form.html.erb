@@ -1,0 +1,9 @@
+<%= simple_form_for(@listing, html: { class: "form-vertical" }) do |f| %>
+  <%= f.input :title, autofocus: true %>
+  <%= f.input :description, as: :text %>
+  <%= f.collection_radio_buttons :trade, [[false, 'Sell'], [true, 'Trade']], :first, :last, item_wrapper_class: 'radio-inline' %>
+  <%= f.association :state, collection: State.all %>
+  <%= f.input :asking_price, label: "Asking Price", as: :decimal %>
+  <%= f.input :asking_items, label: "Asking Items", as: :text %>
+  <%= f.submit "Add Listing" %>
+<% end %>

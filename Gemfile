@@ -44,6 +44,11 @@ gem 'bootstrap-sass', '~> 3.0.3.0'
 gem 'haml'
 gem 'hirb'
 gem 'devise'
+gem 'simple_form'
+gem 'carrierwave'
+gem 'nested_form'
+gem 'mini_magick'
+gem "fog", "~> 1.3.1"
 
 group :test, :development do
   gem 'rspec-rails'
@@ -54,6 +59,11 @@ group :test, :development do
   gem 'shoulda-matchers'
   gem 'capybara'
   gem 'nyan-cat-formatter'
+  gem 'dotenv-rails'
+end
+
+group :test do
+  gem 'email_spec'
 end
 
 group :development do
@@ -61,6 +71,8 @@ group :development do
   gem 'meta_request'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'mailcatcher'
+  gem 'rails-erd'
 end
 
 group :production do

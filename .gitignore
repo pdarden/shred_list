@@ -17,3 +17,5 @@
 .secret
 .env
 config/database.yml
+.pdf
+public/uploads

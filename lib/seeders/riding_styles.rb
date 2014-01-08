@@ -15,7 +15,6 @@ module Seeders
           "Distance",
           "Downhill",
           "Freeride",
-          "Freestyle",
           "230lbs and Up"
         ]
       end

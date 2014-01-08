@@ -1,0 +1,7 @@
+<% @equipment.each do |e| %>
+  <strong>Brand:</strong> <%= e.brand.try(:name) %><br>
+  <strong>Category: </strong> <%= e.category.try(:name) %><br>
+  <strong>Riding Style: </strong> <% e.riding_style.try(:name)  %><br>
+  <strong>Original Price: </strong>$<%= e.original_price %><br>
+  <hr>
+<% end %>

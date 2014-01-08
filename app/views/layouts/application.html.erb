@@ -8,15 +8,15 @@
 </head>
 <body>
 
-  <%= render partial: 'shared/nav' %>
+  <%= render 'shared/nav' %>
 
-  <% flash.each do |name, msg| -%>
-    <%= content_tag :div, msg, class: name %>
-  <% end -%>
+  <%= render 'shared/messages' %>
 
-<div class="container">
-  <%= yield %>
-</div>
+  <div class="container wrapper">
+    <%= yield %>
+  </div>
+
+  <%= render 'shared/footer' %>
 
 </body>
 </html>
