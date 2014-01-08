@@ -1,13 +1,7 @@
 <% @equipment.each do |e| %>
-  <% if !e.brand.nil? %>
-    <strong>Brand:</strong> <%= e.brand.name %><br>
-  <% end %>
-  <% if !e.category.nil? %>
-    <strong>Category: </strong> <%= e.category.name %><br>
-  <% end %>
-  <% if !e.riding_style.nil? %>
-    <strong>Riding Style: </strong> <% e.riding_style.each { | style| "#{style.name} "}  %><br>
-  <% end %>
+  <strong>Brand:</strong> <%= e.brand.try(:name) %><br>
+  <strong>Category: </strong> <%= e.category.try(:name) %><br>
+  <strong>Riding Style: </strong> <% e.riding_style.try(:name)  %><br>
   <strong>Original Price: </strong>$<%= e.original_price %><br>
   <hr>
 <% end %>

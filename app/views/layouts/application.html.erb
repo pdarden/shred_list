@@ -10,14 +10,9 @@
 
   <%= render 'shared/nav' %>
 
-  <% flash.each do |name, msg| -%>
-    <span>
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <%= content_tag :div, msg, class: "#{name} alert alert-info alert-dismissable" %>
-    </span>
-  <% end -%>
+  <%= render 'shared/messages' %>
 
-  <div class="container">
+  <div class="container wrapper">
     <%= yield %>
   </div>
 

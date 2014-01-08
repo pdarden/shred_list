@@ -16,7 +16,7 @@
   <% @listing.equipment.each do |equipment| %>
     <strong>Brand:</strong> <%= equipment.brand.try(:name) %><br>
     <strong>Category:</strong> <%= equipment.category.try(:name) %><br>
-    <strong>Original Price:</strong> <%= equipment.original_price.try(:name) %><br>
+    <strong>Original Price:</strong> $<%= equipment.original_price %><br>
     <strong>Riding Style:</strong> <%= equipment.riding_style.try(:name) %><br>
      <%= link_to 'Show', listing_equipment_path(@listing, equipment) %>
     <% if @listing.owned_by?(current_user) %>
@@ -26,7 +26,8 @@
     <hr>
   <% end %>
   <% if @listing.owned_by?(current_user) %>
-    <%= link_to 'New Equipment', new_listing_equipment_path(@listing) %>
+    <%= link_to 'New Equipment', new_listing_equipment_path(@listing) %><br>
   <% end %>
+  <%= link_to 'All Equipment', listing_equipment_index_path(@listing) %>
 </div>
 

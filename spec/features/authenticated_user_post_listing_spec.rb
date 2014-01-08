@@ -63,8 +63,14 @@ feature 'Authenticated user signs in and post a listing', %Q{
     fill_in 'Original Price', with: user_listing.asking_price
     select brand.name, from: 'equipment_brand_id'
     select category.name, from: 'equipment_category_id'
-    check riding_style.name
+    select riding_style.name, from: 'equipment_riding_style_id'
     click_button 'Create Equipment'
+
+    attach_file 'picture_image', Rails.root.join('spec/file_fixtures/sample_longboard.jpg')
+    click_button 'Add Picture'
+    expect(Picture.last.image.url).to be_present
+
+    click_link 'Back to listing'
 
     expect(page).to have_content user_listing.title
     expect(page).to have_content '$200.37'

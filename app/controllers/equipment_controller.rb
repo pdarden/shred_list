@@ -24,7 +24,7 @@ class EquipmentController < ApplicationController
 
     if @equipment.update(equipment_params)
       redirect_to @equipmentable,
-        notice: "Updated equipment successfully!"
+        flash: { success: "Updated equipment successfully!" }
     else
       render :edit
     end
@@ -35,7 +35,7 @@ class EquipmentController < ApplicationController
 
     if @equipment.save
       redirect_to listing_equipment_path(@equipmentable, @equipment),
-        notice: "You added an equipment!"
+        flash: { success: "You added an equipment!" }
     else
       render :new
     end
