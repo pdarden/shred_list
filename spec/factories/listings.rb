@@ -8,10 +8,17 @@ FactoryGirl.define do
     trade false
     state_id 1
     asking_price 20000
-    asking_items "none"
+    asking_items ""
 
     trait :invalid_asking_price do
       asking_price '$200.35'
     end
+
+    trait :trade do
+      trade true
+      asking_price ''
+      asking_items 'What ever you have to offer'
+    end
+
   end
 end

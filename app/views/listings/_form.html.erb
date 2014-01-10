@@ -5,5 +5,5 @@
   <%= f.association :state, collection: State.all %>
   <%= f.input :price_in_dollars, label: "Asking Price" %>
   <%= f.input :asking_items, label: "Asking Items", as: :text %>
-  <%= f.submit "Add Listing", class: 'btn btn-primary'%>
+  <%= f.submit @listing.new_record? ? "Add Listing" : "Update Listing", class: 'btn btn-primary'%>
 <% end %>

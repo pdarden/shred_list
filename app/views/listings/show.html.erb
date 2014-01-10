@@ -7,8 +7,14 @@
   <% if !@listing.asking_items.nil? && @listing.trade%>
     <p><strong>Asking items:</strong> <%= @listing.asking_items %></p>
   <% end %>
-  <%= link_to 'Edit Listing', edit_listing_path(@listing),  class: 'btn btn-info' %>
-  <%= link_to 'Delete Listing', @listing, method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete-link' %>
+  <% if @listing.owned_by?(current_user) %>
+    <%= link_to 'Edit Listing', edit_listing_path(@listing),  class: 'btn btn-info' %>
+    <%= link_to 'Delete Listing', @listing, method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete-link' %><br>
+  <% end %>
+  <% if user_signed_in? && @listing.owned_by?(current_user) %>
+    <%= link_to 'My Listings', user_listings_path(current_user) %><br>
+  <% end %>
+  <%= link_to 'All Listings', listings_path %>
 </div>
 
 <div class="col-md-6">
@@ -18,8 +24,8 @@
     <strong>Category:</strong> <%= equipment.category.try(:name) %><br>
     <strong>Original Price:</strong> $<%= equipment.price_in_dollars %><br>
     <strong>Riding Style:</strong> <%= equipment.riding_style.try(:name) %><br>
-     <%= link_to 'Show', listing_equipment_path(@listing, equipment) %>
     <% if @listing.owned_by?(current_user) %>
+     <%= link_to 'Show', listing_equipment_path(@listing, equipment) %>
      <%= link_to 'Edit', edit_listing_equipment_path(@listing, equipment) %>
      <%= link_to 'Delete', listing_equipment_path(@listing, equipment), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete-link' %>
     <% end %>
@@ -27,7 +33,7 @@
   <% end %>
   <% if @listing.owned_by?(current_user) %>
     <%= link_to 'New Equipment', new_listing_equipment_path(@listing) %><br>
+    <%= link_to 'All Equipment', listing_equipment_index_path(@listing) %>
   <% end %>
-  <%= link_to 'All Equipment', listing_equipment_index_path(@listing) %>
 </div>
 

@@ -16,9 +16,9 @@ feature 'Authenticated user signs in and post a listing', %Q{
 
   let(:user) { FactoryGirl.create(:user) }
   let(:price) { FactoryGirl.create(:listing) }
+  before { sign_in_as(user) }
 
   scenario 'user signs in and can access create listing page' do
-    sign_in_as(user)
     visit root_path
     click_link 'Sell | Trade'
     current_path.should == new_listing_path
@@ -33,13 +33,13 @@ feature 'Authenticated user signs in and post a listing', %Q{
   end
 
   scenario 'unauthenticated user tries to access create listing page' do
+    sign_out
     visit root_path
     click_link 'Sell | Trade'
     current_path.should == new_user_registration_path
   end
 
   scenario 'authenticated user creates a listing with all required fields' do
-    sign_in_as(user)
     state = State.create(name: 'Connecticut')
     brand = Brand.create(name: 'Loaded')
     category = Category.create(name: 'Completes')
@@ -76,8 +76,7 @@ feature 'Authenticated user signs in and post a listing', %Q{
     sign_out
   end
   scenario 'authenticated user creates a listing with $ sign' do
-    sign_in_as(user)
-    state = State.create(name: 'Connecticut')
+    state = State.create(name: 'Connecticut', id: 1)
     brand = Brand.create(name: 'Loaded')
     category = Category.create(name: 'Completes')
     riding_style = RidingStyle.create(name: 'Downhill')
@@ -113,7 +112,6 @@ feature 'Authenticated user signs in and post a listing', %Q{
   end
 
   scenario 'authenticated user creates a listing without all required fields' do
-    sign_in_as(user)
     visit new_listing_path
     click_button 'Add Listing'
 

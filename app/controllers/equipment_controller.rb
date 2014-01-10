@@ -12,7 +12,6 @@ class EquipmentController < ApplicationController
   def show
     @equipment = @equipmentable.equipment.find(params[:id])
     @picture = Picture.new
-    @pictures = @equipment.pictures
   end
 
   def edit

@@ -9,7 +9,7 @@
   <div class="add_photo">
     <%= simple_form_for([@equipment, @picture], controller: :pictures, method: :create, action: :create, html: { multipart: true }) do |f| %>
       <%= f.input :image, as: :file %>
-      <%= f.submit "Add Picture" %>
+      <%= f.submit "Add Picture", class: 'btn btn-primary' %>
     <% end %>
   </div>
 
@@ -17,7 +17,11 @@
 </div>
 
 <div class="col-md-8">
-  <% @pictures.each do |picture| %>
-    <%= image_tag picture.image_url(:thumb).to_s %>
+  <% if @equipment.pictures.empty? %>
+    <%= image_tag 'fallback_equipment.jpg' %>
+  <% else %>
+    <% @equipment.pictures.each do |picture| %>
+      <%= image_tag picture.image_url(:thumb).to_s %>
+    <% end %>
   <% end %>
 </div>

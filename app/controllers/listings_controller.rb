@@ -1,8 +1,11 @@
 class ListingsController < ApplicationController
-  before_filter :authenticate_user!
   helper_method :listings
 
   def index
+    @listings = Listing
+      .where(filter)
+      .page(params[:page])
+      .per(10)
   end
 
   def show
@@ -53,5 +56,13 @@ class ListingsController < ApplicationController
 
   def listing_params
     params.require(:listing).permit(:title, :description, :trade, :state_id, :price_in_dollars, :asking_items)
+  end
+
+  def filter
+    if params[:user_id]
+      {user_id: params[:user_id]}
+    else
+      {}
+    end
   end
 end

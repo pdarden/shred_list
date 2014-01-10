@@ -2,6 +2,7 @@
 
 FactoryGirl.define do
   factory :picture do
+    equipment_id 1
     image "MyString"
   end
 end

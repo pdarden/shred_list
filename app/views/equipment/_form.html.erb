@@ -3,5 +3,5 @@
   <%= f.association :category, collection: Category.all %>
   <%= f.association :riding_style, collection: RidingStyle.all %>
   <%= f.input :price_in_dollars, label: 'Original Price' %>
-  <%= f.submit "Create Equipment" %>
+  <%= f.submit @equipment.new_record? ? "Create Equipment" : "Update Equipment", class: 'btn btn-primary' %>
 <% end %>
