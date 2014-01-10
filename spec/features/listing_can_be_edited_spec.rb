@@ -13,8 +13,9 @@ feature 'Authenticated user can edit a listing', %Q{
   # * I can save new changes.
 
   let(:user) { FactoryGirl.create(:user) }
+  let(:another_user) { FactoryGirl.create(:user) }
   let(:listing) { FactoryGirl.create(:listing, user_id: user.id, state_id: state.id) }
-  let(:random_listing) { FactoryGirl.create(:listing, title: 'RANDOM',  user_id: 9, state_id: state2.id) }
+  let(:random_listing) { FactoryGirl.create(:listing, title: 'RANDOM',  user_id: another_user.id, state_id: state2.id) }
   let(:brand) { FactoryGirl.create(:brand, name: 'Sector9') }
   let(:equipment) { FactoryGirl.create(:equipment, brand_id: brand.id, equipmentable_type: 'Listing', equipmentable_id: listing.id, category_id: category.id) }
   let(:picture) { FactoryGirl.create(:picture, equipment_id: equipment.id) }
