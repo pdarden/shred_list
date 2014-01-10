@@ -2,14 +2,14 @@
 
 <div class="col-md-4">
   <strong>Brand:</strong> <%= @equipment.brand.try(:name) %><br>
-  <strong>Category: </strong> <%= @equipment.category.try(:name) %><br>
-  <strong>Riding Style: </strong> <% @equipment.riding_style.try(:name)  %><br>
-  <strong>Original Price: </strong>$<%= '%.2f' % @equipment.original_price %><br>
+  <strong>Category:</strong> <%= @equipment.category.try(:name) %><br>
+  <strong>Riding Style:</strong> <% @equipment.riding_style.try(:name)  %><br>
+  <strong>Original Price:</strong> $<%= @equipment.price_in_dollars %><br>
 
   <div class="add_photo">
     <%= simple_form_for([@equipment, @picture], controller: :pictures, method: :create, action: :create, html: { multipart: true }) do |f| %>
       <%= f.input :image, as: :file %>
-      <%= f.submit "Add Picture" %>
+      <%= f.submit "Add Picture", class: 'btn btn-primary' %>
     <% end %>
   </div>
 
@@ -17,7 +17,11 @@
 </div>
 
 <div class="col-md-8">
-  <% @pictures.each do |picture| %>
-    <%= image_tag picture.image_url(:thumb).to_s %>
+  <% if @equipment.pictures.empty? %>
+    <%= image_tag 'fallback_equipment.jpg' %>
+  <% else %>
+    <% @equipment.pictures.each do |picture| %>
+      <%= image_tag picture.image_url(:thumb).to_s %>
+    <% end %>
   <% end %>
 </div>

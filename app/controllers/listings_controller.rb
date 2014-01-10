@@ -2,6 +2,10 @@ class ListingsController < ApplicationController
   helper_method :listings
 
   def index
+    @listings = Listing
+      .where(filter)
+      .page(params[:page])
+      .per(10)
   end
 
   def show
@@ -29,7 +33,7 @@ class ListingsController < ApplicationController
   end
 
   def update
-    @listing = Lising.new(listing_params)
+    @listing = Listing.find(params[:id])
 
     if @listing.update(listing_params)
       redirect_to listing_path(@listing),
@@ -51,6 +55,14 @@ class ListingsController < ApplicationController
   end
 
   def listing_params
-    params.require(:listing).permit(:title, :description, :trade, :state_id, :asking_price, :asking_items)
+    params.require(:listing).permit(:title, :description, :trade, :state_id, :price_in_dollars, :asking_items)
+  end
+
+  def filter
+    if params[:user_id]
+      {user_id: params[:user_id]}
+    else
+      {}
+    end
   end
 end
