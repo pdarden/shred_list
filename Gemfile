@@ -76,6 +76,8 @@ group :development do
   gem 'binding_of_caller'
   gem 'mailcatcher'
   gem 'rails-erd'
+  gem 'bullet'
+  gem 'brakeman'
 end
 
 group :production do
