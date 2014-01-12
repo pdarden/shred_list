@@ -137,6 +137,7 @@ GEM
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-ssh (2.7.0)
+    newrelic_rpm (3.7.1.182)
     nokogiri (1.5.11)
     nyan-cat-formatter (0.5.2)
       rspec (>= 2.13)
@@ -283,6 +284,7 @@ DEPENDENCIES
   meta_request
   mini_magick
   nested_form
+  newrelic_rpm
   nyan-cat-formatter
   pg
   pry-rails

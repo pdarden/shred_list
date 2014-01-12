@@ -50,6 +50,7 @@ gem 'nested_form'
 gem 'mini_magick'
 gem "fog", "~> 1.3.1"
 gem 'kaminari'
+gem 'newrelic_rpm'
 
 group :test, :development do
   gem 'rspec-rails'
