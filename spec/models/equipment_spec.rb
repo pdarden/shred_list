@@ -6,7 +6,7 @@ describe Equipment do
 
   it { should have_many(:pictures).dependent(:destroy) }
 
-  it { should belong_to(:equipmentable) }
+  it { should belong_to(:listing) }
 
   it { should belong_to(:riding_style) }
 

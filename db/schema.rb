@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140107180307) do
+ActiveRecord::Schema.define(version: 20140110193841) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,14 +32,12 @@ ActiveRecord::Schema.define(version: 20140107180307) do
     t.integer  "brand_id"
     t.integer  "category_id"
     t.integer  "riding_style_id"
-    t.integer  "original_price",     null: false
-    t.integer  "equipmentable_id"
-    t.string   "equipmentable_type"
+    t.integer  "original_price",  null: false
+    t.integer  "offer_id"
+    t.integer  "listing_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "equipment", ["equipmentable_id", "equipmentable_type"], name: "index_equipment_on_equipmentable_id_and_equipmentable_type", using: :btree
 
   create_table "listings", force: true do |t|
     t.integer  "user_id",                      null: false
@@ -63,11 +61,14 @@ ActiveRecord::Schema.define(version: 20140107180307) do
   end
 
   create_table "pictures", force: true do |t|
-    t.integer  "equipment_id", null: false
-    t.string   "image",        null: false
+    t.string   "image",           null: false
+    t.integer  "picturable_id"
+    t.string   "picturable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "pictures", ["picturable_id", "picturable_type"], name: "index_pictures_on_picturable_id_and_picturable_type", using: :btree
 
   create_table "riding_styles", force: true do |t|
     t.string   "name",       null: false

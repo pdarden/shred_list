@@ -1,25 +1,31 @@
 class PicturesController < ApplicationController
+  before_filter :picturable
   def new
-    @equipment = Equipment.find(params[:id])
-    @picture = Picture.new
+    @picture = picturable.pictures.new
   end
 
   def create
-    @equipment = Equipment.find(params[:equipment_id])
-    @equipmentable_id = @equipment.equipmentable_id
-    @picture = @equipment.pictures.build(picture_params)
+    @picture = picturable.pictures.new(picture_params)
     if @picture.save
-      redirect_to listing_equipment_path(@equipmentable_id, @equipment.id)
+      redirect_to listing_equipment_path(@picturable.listing, @picturable),
+        flash: { success: "You added a picture!" }
     else
       render :new
     end
   end
 
   def destroy
-    @picture.find(params[:id]).destroy
+    @picturable.pictures.find(params[:id]).destroy
+    redirect_to listing_equipment_path(@picturable.listing, @picturable),
+      notice: "Picture was successfully deleted."
   end
 
   private
+  def picturable
+    resource, id = request.path.split('/')[1, 2]
+    @picturable = resource.singularize.classify.constantize.find(id)
+  end
+
   def picture_params
     params.require(:picture).permit(:equipment_id, :image)
   end

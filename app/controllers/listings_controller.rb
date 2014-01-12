@@ -10,6 +10,10 @@ class ListingsController < ApplicationController
 
   def show
     @listing = Listing.find(params[:id])
+    @offer = Offer.new
+    @offers = @listing.offers
+    @picture = Picture.new
+    @equipments = @listing.equipment.map { |e| e if e.pictures.present? }
   end
 
   def new
@@ -60,7 +64,7 @@ class ListingsController < ApplicationController
 
   def filter
     if params[:user_id]
-      {user_id: params[:user_id]}
+      { user_id: params[:user_id] }
     else
       {}
     end

@@ -9,15 +9,13 @@
 </div>
 <%= render 'form' %>
 
-<script>
-  $(document).ready(function() {
-    $('.listing_asking_items').hide();
-    $("[name='listing[trade]']").change(function(){
-      if($(this).val()=="false") {
-        $('.listing_asking_items').hide();
-      }else{
-        $('.listing_asking_items').show();
-      }
+<%= content_for :extra_footer do %>
+  <script>
+    $(document).ready(function() {
+      $('.listing_asking_items').toggle();
+      $("[name='listing[trade]']").change(function(){
+        $('.listing_asking_items').toggle();
+      });
     });
-  });
-</script>
+  </script>
+<% end %>

@@ -1,3 +1,4 @@
+<%= link_to 'Back to listing', listing_path(@listing) %>
 <h1>Equipment Info</h1>
 
 <div class="col-md-4">
@@ -7,21 +8,21 @@
   <strong>Original Price:</strong> $<%= @equipment.price_in_dollars %><br>
 
   <div class="add_photo">
-    <%= simple_form_for([@equipment, @picture], controller: :pictures, method: :create, action: :create, html: { multipart: true }) do |f| %>
+    <%= simple_form_for([@equipment, @picture], html: { multipart: true }) do |f| %>
       <%= f.input :image, as: :file %>
       <%= f.submit "Add Picture", class: 'btn btn-primary' %>
     <% end %>
   </div>
 
-  <%= link_to 'Back to listing', listing_path(@equipmentable) %>
 </div>
 
 <div class="col-md-8">
-  <% if @equipment.pictures.empty? %>
-    <%= image_tag 'fallback_equipment.jpg' %>
-  <% else %>
     <% @equipment.pictures.each do |picture| %>
-      <%= image_tag picture.image_url(:thumb).to_s %>
+      <div class="col-xs-6 col-md-4">
+        <a href="#" class="thumbnail">
+          <%= image_tag picture.image_url(:thumb).to_s %>
+          <%= link_to 'Delete', [@equipment, picture], method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete-link' %>
+        </a>
+      </div>
     <% end %>
-  <% end %>
 </div>

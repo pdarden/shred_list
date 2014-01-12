@@ -8,5 +8,5 @@ describe Offer do
 
   it { should belong_to(:listing) }
 
-  it { should have_many(:equipment).dependent(:destroy) }
+  it { should have_many(:pictures).dependent(:destroy) }
 end

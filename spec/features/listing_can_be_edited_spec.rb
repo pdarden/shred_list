@@ -17,7 +17,7 @@ feature 'Authenticated user can edit a listing', %Q{
   let(:listing) { FactoryGirl.create(:listing, user_id: user.id, state_id: state.id) }
   let(:random_listing) { FactoryGirl.create(:listing, title: 'RANDOM',  user_id: another_user.id, state_id: state2.id) }
   let(:brand) { FactoryGirl.create(:brand, name: 'Sector9') }
-  let(:equipment) { FactoryGirl.create(:equipment, brand_id: brand.id, equipmentable_type: 'Listing', equipmentable_id: listing.id, category_id: category.id) }
+  let(:equipment) { FactoryGirl.create(:equipment, brand_id: brand.id, listing_id: listing.id, category_id: category.id) }
   let(:picture) { FactoryGirl.create(:picture, equipment_id: equipment.id) }
   let(:state) { FactoryGirl.create(:state, id: 1) }
   let(:state2) { FactoryGirl.create(:state, id: 2) }
@@ -45,7 +45,7 @@ feature 'Authenticated user can edit a listing', %Q{
     click_link 'Edit Listing'
     fill_in 'Title', with: 'New Title'
     click_button 'Update Listing'
-    within ('.container') do
+    within ('.listings-nav') do
       click_link 'My Listings'
     end
 

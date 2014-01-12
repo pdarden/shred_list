@@ -1,39 +1,69 @@
-<div class="col-md-6">
-  <h1><%= @listing.title %></h1>
-  <p><strong>Description:</strong> <%= @listing.description %></p>
-  <% if !@listing.asking_price.nil? %>
-    <p><strong>Asking price:</strong> $<%= @listing.price_in_dollars %></p>
+<div class="post">
+  <p class='listings-nav'><% if user_signed_in? && @listing.owned_by?(current_user) %>
+    <%= link_to 'My Listings', user_listings_path(current_user) %> | 
   <% end %>
-  <% if !@listing.asking_items.nil? && @listing.trade%>
-    <p><strong>Asking items:</strong> <%= @listing.asking_items %></p>
-  <% end %>
-  <% if @listing.owned_by?(current_user) %>
-    <%= link_to 'Edit Listing', edit_listing_path(@listing),  class: 'btn btn-info' %>
-    <%= link_to 'Delete Listing', @listing, method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete-link' %><br>
-  <% end %>
-  <% if user_signed_in? && @listing.owned_by?(current_user) %>
-    <%= link_to 'My Listings', user_listings_path(current_user) %><br>
-  <% end %>
-  <%= link_to 'All Listings', listings_path %>
+  <%= link_to 'All Listings', listings_path %></p>
+  <div class="row">
+    <div class="col-md-7">
+      <h1><%= @listing.title %></h1>
+      <p><strong>Description:</strong> <%= @listing.description %></p>
+      <% if !@listing.asking_price.nil? %>
+        <p><strong>Asking price:</strong> $<%= @listing.price_in_dollars %></p>
+      <% end %>
+      <% if !@listing.asking_items.nil? && @listing.trade%>
+        <p><strong>Asking items:</strong> <%= @listing.asking_items %></p>
+      <% end %>
+
+      <%= render 'listings/equipments' %> 
+
+      <% if @listing.owned_by?(current_user) %>
+        <%= link_to 'Edit Listing', edit_listing_path(@listing),  class: 'btn btn-info' %>
+        <%= link_to 'New Equipment', new_listing_equipment_path(@listing), class: 'btn btn-info' %>
+        <%= link_to 'Delete Listing', @listing, method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete-link' %><br>
+      <% end %>
+    </div>
+
+    <div class="col-md-5">
+      <div id="carousel-generic" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <% @equipments.each_with_index do |equipment, index| %>
+              <% equipment.pictures.each do |picture| %>
+                <div class="item <%= index == 0 && equipment.pictures.first == picture ? 'active' : '' %>">
+                  <%= image_tag picture.image_url.to_s %>
+                  <div class="carousel-caption">
+                    <h3><%= equipment.brand.name %></h3>
+                    <p>$<%= equipment.price_in_dollars %></p>
+                  </div>
+                </div>
+              <% end %>
+          <% end %>
+        </div>
+        <a  class="left carousel-control" href="#carousel-generic" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" href="#carousel-generic" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class="col-md-6">
-  <h4>Equipments:</h4>
-  <% @listing.equipment.each do |equipment| %>
-    <strong>Brand:</strong> <%= equipment.brand.try(:name) %><br>
-    <strong>Category:</strong> <%= equipment.category.try(:name) %><br>
-    <strong>Original Price:</strong> $<%= equipment.price_in_dollars %><br>
-    <strong>Riding Style:</strong> <%= equipment.riding_style.try(:name) %><br>
-    <% if @listing.owned_by?(current_user) %>
-     <%= link_to 'Show', listing_equipment_path(@listing, equipment) %>
-     <%= link_to 'Edit', edit_listing_equipment_path(@listing, equipment) %>
-     <%= link_to 'Delete', listing_equipment_path(@listing, equipment), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete-link' %>
-    <% end %>
-    <hr>
-  <% end %>
-  <% if @listing.owned_by?(current_user) %>
-    <%= link_to 'New Equipment', new_listing_equipment_path(@listing) %><br>
-    <%= link_to 'All Equipment', listing_equipment_index_path(@listing) %>
-  <% end %>
+  <p><%= link_to 'Make An Offer', user_signed_in? ? '#' : new_user_registration_path, id: 'make_offer', class: "btn btn-primary" %></p>
+
+<div class="offers">
+  <%= render 'offers/form' %>
 </div>
 
+  <%= render 'offers/offers' %>
+
+<%= content_for :extra_footer do %>
+  <script>
+    $(document).ready(function() {
+      $('#new_offer').toggle();
+      $('#make_offer').on("click", function(e) {
+        $('#new_offer').toggle();
+      });
+    });
+  </script>
+<% end %>

@@ -1,0 +1,11 @@
+<%= simple_form_for([@listing, @offer]) do |f| %>
+  <div class="well">
+    <%= f.input :description, as: :text %>
+    <%= simple_fields_for(:pictures, html: { multipart: true }) do |p| %>
+      <%= p.input :image, as: :file %>
+      <%= p.submit "Add Picture", class: 'btn btn-default btn-sm' %>
+    <% end %>
+    <%= f.input :private_message, as: :boolean, checked_value: true, unchecked_value: false %>
+    <%= f.submit "Submit", class: 'btn btn-success' %>
+  </div>
+<% end %>
