@@ -1,28 +1,24 @@
 class EquipmentController < ApplicationController
-  before_filter :load_equipmentable, :authenticate_user!
-
-  def index
-    @equipment = @equipmentable.equipment
-  end
+  before_filter :listing, :authenticate_user!
 
   def new
-    @equipment = @equipmentable.equipment.new
+    @equipment = listing.equipment.new
   end
 
   def show
-    @equipment = @equipmentable.equipment.find(params[:id])
-    @picture = Picture.new
+    @equipment = listing.equipment.find(params[:id])
+    @picture = @equipment.pictures.new
   end
 
   def edit
-    @equipment = @equipmentable.equipment.find(params[:id])
+    @equipment = listing.equipment.find(params[:id])
   end
 
   def update
     @equipment = Equipment.find(params[:id])
 
     if @equipment.update(equipment_params)
-      redirect_to @equipmentable,
+      redirect_to listing,
         flash: { success: "Updated equipment successfully!" }
     else
       render :edit
@@ -30,10 +26,10 @@ class EquipmentController < ApplicationController
   end
 
   def create
-    @equipment = @equipmentable.equipment.new(equipment_params)
+    @equipment = listing.equipment.new(equipment_params)
 
     if @equipment.save
-      redirect_to listing_equipment_path(@equipmentable, @equipment),
+      redirect_to listing_equipment_path(@listing, @equipment),
         flash: { success: "You added an equipment!" }
     else
       render :new
@@ -41,15 +37,14 @@ class EquipmentController < ApplicationController
   end
 
   def destroy
-    @equipmentable.equipment.find(params[:id]).destroy
-    redirect_to @equipmentable,
+    listing.equipment.find(params[:id]).destroy
+    redirect_to listing,
       notice: "Equipment was successfully deleted."
   end
 
   private
-  def load_equipmentable
-    resource, id = request.path.split('/')[1, 2]
-    @equipmentable = resource.singularize.classify.constantize.find(id)
+  def listing
+    @listing ||= Listing.find(params[:listing_id])
   end
 
   def equipment_params

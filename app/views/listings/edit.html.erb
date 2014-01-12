@@ -1,15 +1,15 @@
 <h1 class='text-center'>Editing Listing</h1>
 <%= render 'form' %>
 
-<script>
-  $(document).ready(function() {
-    $('.listing_asking_items').hide();
-    $("[name='listing[trade]']").change(function(){
-      if($(this).val()=="false") {
-        $('.listing_asking_items').hide();
-      }else{
-        $('.listing_asking_items').show();
-      }
+<%= content_for :extra_footer do %>
+  <script>
+    $(document).ready(function() {
+      <% unless @listing.trade %>
+        $('.listing_asking_items').toggle();
+      <% end %>
+      $("[name='listing[trade]']").change(function(){
+        $('.listing_asking_items').toggle();
+      });
     });
-  });
-</script>
+  </script>
+<% end %>

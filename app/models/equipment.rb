@@ -1,5 +1,5 @@
 class Equipment < ActiveRecord::Base
-  validates_presence_of :original_price
+  validates_presence_of :original_price, :category_id, :brand_id
   validates_numericality_of :original_price,
     greater_than_or_equal_to: 0
   belongs_to :brand,
@@ -8,9 +8,10 @@ class Equipment < ActiveRecord::Base
     inverse_of: :equipment
   belongs_to :riding_style,
     inverse_of: :equipment
-  belongs_to :equipmentable,
-    polymorphic: true
+  belongs_to :listing,
+    inverse_of: :equipment
   has_many :pictures,
+    as: :picturable,
     dependent: :destroy
 
   def price_in_dollars

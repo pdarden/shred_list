@@ -4,7 +4,8 @@ class Offer < ActiveRecord::Base
     inverse_of: :offers
   belongs_to :listing,
     inverse_of: :offers
-  has_many :equipment,
-    as: :equipmentable,
+  has_many :pictures,
+    as: :picturable,
     dependent: :destroy
+  accepts_nested_attributes_for :pictures, allow_destroy: true
 end

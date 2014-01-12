@@ -4,19 +4,20 @@ ShredList::Application.routes.draw do
 
   resources :listings do
     resources :equipment
-    resources :offers
+    resources :offers, only: [:new, :destroy, :create]
   end
 
-  resources :equipment do
-    resources :pictures
+  resources :equipment, only: [] do
+    resources :pictures, only: [:new, :destroy, :create]
   end
 
-  resources :offers do
-    resources :equipment
+  resources :offers, only: [] do
+    resources :pictures, only: [:new, :destroy, :create]
   end
 
-  resources :users do
-    resources :listings
+  resources :users, only: [ :show ] do
+    resources :listings, only: [:index]
+    resources :offers, only: [:index]
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -11,7 +11,7 @@ class Listing < ActiveRecord::Base
     inverse_of: :listings
 
   has_many :equipment,
-    as: :equipmentable,
+    inverse_of: :listing,
     dependent: :destroy
   has_many :offers,
     inverse_of: :listing,
@@ -55,5 +55,9 @@ class Listing < ActiveRecord::Base
 
   def brands
     equipment.map{ |e| Brand.find(e.brand_id) }.uniq
+  end
+
+  def user_id
+    self.user.id
   end
 end

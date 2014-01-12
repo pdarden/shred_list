@@ -15,7 +15,7 @@ feature 'Authenticated user signs in and post a listing', %Q{
   # * If I successfully created a listing, I am redirected to the listing show page.
 
   let(:user) { FactoryGirl.create(:user) }
-  let(:price) { FactoryGirl.create(:listing) }
+  let(:price) { FactoryGirl.create(:listing, user_id: user.id) }
   before { sign_in_as(user) }
 
   scenario 'user signs in and can access create listing page' do

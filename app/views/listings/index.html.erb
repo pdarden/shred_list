@@ -5,11 +5,7 @@
     <% listings.each do |listing| %>
       <div class="col-sm-6 col-md-4">
         <div class="thumbnail">
-          <% if listing.equipment.present? %>
-            <%= image_tag listing.equipment_image %>
-          <% else %>
-            <%# Default Image Here %>
-          <% end %>
+          <%= image_tag listing.equipment.present? ? listing.equipment_image : 'fallback/default.jpg' %>
           <div class="caption">
             <h3><%= listing.try(:title) %></h3>
             <p><%= listing.try(:description) %></p>

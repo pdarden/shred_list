@@ -1,0 +1,13 @@
+<% @offers.each do |offer| %>
+  <% if (offer.private_message == true && !user_signed_in?) || (offer.private_message == true && current_user.id != offer.user_id && current_user.id != @listing.user_id) %>
+    <div class="hidden">
+  <% else %>
+    <div class="well well-lg">
+  <% end %>
+      <strong>By: </strong> <%= link_to offer.user.try(:username), user_path(offer.user_id) %><br>
+      <strong>Desctiption:</strong> <%= offer.try(:description) %><br>
+      <% offer.pictures.each do |picture| %>
+        <%= picture.image_url(:thumb).to_s %>
+      <% end %>
+    </div>
+<% end %>
