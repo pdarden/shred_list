@@ -5,7 +5,7 @@
   <%= link_to 'All Listings', listings_path %></p>
   <div class="row">
     <div class="col-md-7">
-      <h1><%= @listing.title %></h1>
+      <h1><%= @listing.title %><small> by <%= link_to @listing.user.username, user_path(@listing.user)%></h1>
       <p><strong>Description:</strong> <%= @listing.description %></p>
       <% if !@listing.asking_price.nil? %>
         <p><strong>Asking price:</strong> $<%= @listing.price_in_dollars %></p>
@@ -13,6 +13,7 @@
       <% if !@listing.asking_items.nil? && @listing.trade%>
         <p><strong>Asking items:</strong> <%= @listing.asking_items %></p>
       <% end %>
+      <p><strong>Location:</strong> <%= @listing.state.try(:name) %></p>
 
       <%= render 'listings/equipments' %> 
 
