@@ -9,7 +9,8 @@
           <div class="caption">
             <h3><%= listing.try(:title) %></h3>
             <p><%= listing.try(:description) %></p>
-            <p><strong>Location</strong>: <%= listing.state_name %><br>
+            <p><strong>By:</strong> <%= link_to listing.user.try(:username).capitalize, user_path(listing.user) %><br>
+            <strong>Location</strong>: <%= listing.state_name %><br>
             <strong>Category</strong>: 
             <% listing.categories.each do |category| %>
               <%= category.name %><%= "," unless category == listing.categories.last %>
