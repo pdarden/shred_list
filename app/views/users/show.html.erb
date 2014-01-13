@@ -1,1 +1,4 @@
-Username: <%= @user.username %>
+<h1>Listings by <%= @user.username.capitalize %>:</h1>
+<% @listings.each do |listing| %>
+  <h3><%= link_to listing.title, listing_path(listing) %></h3>
+<% end %>
