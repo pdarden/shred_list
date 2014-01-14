@@ -23,3 +23,4 @@ class Equipment < ActiveRecord::Base
     self.original_price = dollars.to_d * 100 if dollars.present?
   end
 end
+

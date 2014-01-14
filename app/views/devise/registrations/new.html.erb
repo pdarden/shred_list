@@ -1,27 +1,22 @@
-<h2>Sign Up</h2>
+<div class="col-md-8 col-md-offset-2">
+  <h2>Sign Up</h2>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'form-vertical' }) do |f| %>
 
-  <div class="form-group"><%= f.label :first_name, "First Name" %><br />
-  <%= f.text_field :first_name, autofocus: true, class: "form-control" %></div>
+    <%= f.input :first_name, label: 'First Name', autofocus: true %>
 
-  <div class="form-group"><%= f.label :last_name, "Last Name" %><br />
-  <%= f.text_field :last_name, class: "form-control" %></div>
+    <%= f.input :last_name, label: 'Last Name' %>
 
-  <div class="form-group"><%= f.label :username %><br />
-  <%= f.text_field :username, class: "form-control" %></div>
+    <%= f.input :username %>
 
-  <div class="form-group"><%= f.label :email %><br />
-  <%= f.email_field :email, class: "form-control" %></div>
+    <%= f.input :email, as: :email %>
 
-  <div class="form-group"><%= f.label :password %><br />
-  <%= f.password_field :password, class: "form-control" %></div>
+    <%= f.input :password, as: :password %>
 
-  <div class="form-group"><%= f.label :password_confirmation, "Password Confirmation" %><br />
-  <%= f.password_field :password_confirmation, class: "form-control" %></div>
+    <%= f.input :password_confirmation, label: 'Password Confirmation', as: :password %>
+    <%= f.submit "Sign Up", class: "btn btn-success" %>
+  <% end %>
 
-  <div><%= f.submit "Sign Up", class: "btn btn-default" %></div>
-<% end %>
+  <%= render "devise/shared/links" %>
+</div>
 
-<%= render "devise/shared/links" %>

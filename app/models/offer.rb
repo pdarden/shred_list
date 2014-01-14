@@ -9,3 +9,4 @@ class Offer < ActiveRecord::Base
     dependent: :destroy
   accepts_nested_attributes_for :pictures, allow_destroy: true
 end
+

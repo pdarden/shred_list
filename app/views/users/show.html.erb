@@ -1,4 +1,5 @@
 <h1>Listings by <%= @user.username.capitalize %>:</h1>
 <% @listings.each do |listing| %>
-  <h3><%= link_to listing.title, listing_path(listing) %></h3>
+  <h3><%= link_to listing.title, listing_path(listing) %> <small><%= listing.trade ? "WTT" : "WTS" %></small></h3>
 <% end %>
+

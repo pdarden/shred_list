@@ -1,3 +1,0 @@
-class StatesController < ApplicationController
-  
-end

@@ -1,0 +1,12 @@
+<h1>Offers You've Made</h1>
+<% if @offers.present? %>
+  <% @offers.each do |offer| %>
+    <div class="well">
+      <strong>Listing:</strong> <%= link_to offer.listing.title.capitalize, listing_path(offer.listing) %><br>
+      <%= offer.description %><br>
+    </div>
+  <% end %>
+<% else %>
+  <h3>You have not make any offers yet.</h3>
+<% end %>
+

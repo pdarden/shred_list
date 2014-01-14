@@ -4,3 +4,4 @@ class Brand < ActiveRecord::Base
     inverse_of: :brand,
     dependent: :nullify
 end
+

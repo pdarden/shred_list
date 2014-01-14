@@ -19,7 +19,7 @@ class EquipmentController < ApplicationController
 
     if @equipment.update(equipment_params)
       redirect_to listing,
-        flash: { success: "Updated equipment successfully!" }
+        flash: { success: "This equipment need at least a picturefor it to go live." }
     else
       render :edit
     end
@@ -51,3 +51,4 @@ class EquipmentController < ApplicationController
     params.require(:equipment).permit(:brand_id, :category_id, :riding_style_id, :price_in_dollars)
   end
 end
+

@@ -9,8 +9,7 @@
           <div class="caption">
             <h3><%= listing.try(:title) %></h3>
             <p><%= listing.try(:description) %></p>
-            <p><strong>By:</strong> <%= link_to listing.user.try(:username).capitalize, user_path(listing.user) %><br>
-            <strong>Location</strong>: <%= listing.state_name %><br>
+            <p><strong><%= link_to listing.user.try(:username).capitalize, user_path(listing.user) %></strong> from <strong><%= listing.state_name %></strong> is <strong><%= listing.trade ? "trading" : "selling" %></strong><br>
             <strong>Category</strong>: 
             <% listing.categories.each do |category| %>
               <%= category.name %><%= "," unless category == listing.categories.last %>
@@ -24,8 +23,14 @@
         </div>
       </div>
     <% end %>
+  <% else %>
+    <div class="alert alert-warning col-md-8 col-md-offset-2">
+      <h1 class="text-center">You don't have anything listing yet.</h1>
+      <h3 class="text-center"><%= link_to 'Make One!', new_listing_path %></h3>
+    </div>
   <% end %>
 </div>
 
 
 <%= paginate @listings %>
+

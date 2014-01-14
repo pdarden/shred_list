@@ -30,3 +30,4 @@ class PicturesController < ApplicationController
     params.require(:picture).permit(:equipment_id, :image)
   end
 end
+
