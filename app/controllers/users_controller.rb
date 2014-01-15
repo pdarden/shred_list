@@ -4,3 +4,4 @@ class UsersController < ApplicationController
     @listings = @user.listings
   end
 end
+

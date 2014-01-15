@@ -1,31 +1,75 @@
-<h1>Find Your Shred</h1>
-
-<div class="row" >
-  <% if listings.present? %>
-    <% listings.each do |listing| %>
-      <div class="col-sm-6 col-md-4">
-        <div class="thumbnail">
-          <%= image_tag listing.equipment.present? ? listing.equipment_image : 'fallback/default.jpg' %>
-          <div class="caption">
-            <h3><%= listing.try(:title) %></h3>
-            <p><%= listing.try(:description) %></p>
-            <p><strong>By:</strong> <%= link_to listing.user.try(:username).capitalize, user_path(listing.user) %><br>
-            <strong>Location</strong>: <%= listing.state_name %><br>
-            <strong>Category</strong>: 
-            <% listing.categories.each do |category| %>
-              <%= category.name %><%= "," unless category == listing.categories.last %>
-            <% end %><br>
-            <strong>Brand</strong>: 
-            <% listing.brands.each do |brand| %>
-              <%= brand.name %><%= "," unless brand == listing.brands.last %>
-            <% end %></p>
-            <%= link_to 'Details', listing_path(listing), class: 'btn btn-primary' %>
-          </div>
-        </div>
-      </div>
-    <% end %>
+<nav class="st-menu st-effect-1" id="menu-1">
+<h2 class="icon icon-lab">Search</h2>
+<ul>
+  <%= search_form_for @q, url: search_listings_path, html: { method: :post } do |f| %>
+    <li>
+    <%= f.label :trade_eq, "Sell or Trade" %>
+    <%= f.select :trade_eq, options_for_select([["Sell",false], ["Trade",true]]), include_blank: true %>
+    </li>
+    <li>
+    <%= f.label :title_cont, "Title" %>
+    <%= f.text_field :title_cont %>
+    </li>
+    <li>
+    <%= f.label :state_name_cont, "State" %>
+    <%= f.select :state_id_eq, options_from_collection_for_select(State.all, "id", "name", @q.state_id_eq), include_blank: true %>
+    </li>
+    <li>
+    <%= f.label :equipment_brand_id_eq, "Brand" %>
+    <%= f.select :equipment_brand_id_eq, options_from_collection_for_select(Brand.all, "id", "name", @q.equipment_brand_id_eq), include_blank: true %>
+    </li>
+    <li>
+    <%= f.label :equipment_category_id_eq, "Category" %>
+    <%= f.select :equipment_category_id_eq, options_from_collection_for_select(Category.all, "id", "name", @q.equipment_category_id_eq), include_blank: true %>
+    </li>
+    <li>
+    <%= f.submit "Find", class: 'btn btn-success' %>
+    </li>
   <% end %>
+</ul>
+</nav>
+
+<div class="st-content">
+  <div class="st-content-inner">
+    <h1>Find Your Shred</h1>
+    <div id="st-trigger-effects">
+      <button data-effect="st-effect-1", class="btn btn-success">Sort Results</button>
+    </div>
+
+    <div class="row" >
+      <% if listings.present? %>
+        <% listings.each do |listing| %>
+          <div class="col-sm-8 col-md-4">
+            <div class="thumbnail">
+              <%= image_tag listing.equipment.present? ? listing.equipment_image : 'fallback/default.jpg' %>
+              <div class="caption">
+                <h3 class="title"><%= listing.try(:title) %></h3>
+                <div class="description"><p><%= listing.try(:description) %></p></div>
+                <p class="detail"><strong><%= link_to listing.user.try(:username).capitalize, user_path(listing.user) %></strong> from <strong><%= listing.state_name %></strong> is <strong><%= listing.trade ? "trading" : "selling" %></strong><br>
+                <strong>Category</strong>: 
+                <% listing.categories.each do |category| %>
+                  <%= category.name %><%= "," unless category == listing.categories.last %>
+                <% end %><br>
+                <strong>Brand</strong>: 
+                <% listing.brands.each do |brand| %>
+                  <%= brand.name %><%= "," unless brand == listing.brands.last %>
+                <% end %></p>
+                <%= link_to 'Details', listing_path(listing), class: 'btn btn-primary' %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="alert alert-warning col-md-8 col-md-offset-2">
+          <h1 class="text-center">There are no listings.</h1>
+          <h3 class="text-center"><%= link_to 'Make One!', new_listing_path %></h3>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="col-md-7 col-md-offset-4">
+      <%= paginate @listings, theme: 'twitter-bootstrap-3', pagination_class: 'pagination-sm' %>
+    </div>
+  </div>
 </div>
 
-
-<%= paginate @listings %>

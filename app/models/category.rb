@@ -4,3 +4,4 @@ class Category < ActiveRecord::Base
     inverse_of: :category,
     dependent: :nullify
 end
+

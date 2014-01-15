@@ -4,3 +4,4 @@ class RidingStyle < ActiveRecord::Base
     inverse_of: :riding_style,
     dependent: :nullify
 end
+

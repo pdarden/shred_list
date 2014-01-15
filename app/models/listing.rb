@@ -1,6 +1,6 @@
 class Listing < ActiveRecord::Base
 
-  validates_presence_of :title, :description
+  validates_presence_of :title, :description, :state_id
   validates_numericality_of :asking_price,
     greater_than_or_equal_to: 0,
     allow_nil: true
@@ -61,3 +61,4 @@ class Listing < ActiveRecord::Base
     self.user.id
   end
 end
+

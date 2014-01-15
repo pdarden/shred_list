@@ -2,10 +2,19 @@ class ListingsController < ApplicationController
   helper_method :listings
 
   def index
-    @listings = Listing
+    @q = Listing.search(params[:q])
+
+    @listings = @q.result
+      .order('created_at DESC')
       .where(filter)
       .page(params[:page])
-      .per(10)
+      .per(9)
+
+  end
+
+  def search
+    index
+    render :index
   end
 
   def show
@@ -70,3 +79,4 @@ class ListingsController < ApplicationController
     end
   end
 end
+

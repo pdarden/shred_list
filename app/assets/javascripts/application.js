@@ -15,3 +15,7 @@
 //= require_tree
 //= require bootstrap
 //= require jquery_nested_form
+//= require sidebar_effects
+//= require classie
+
+

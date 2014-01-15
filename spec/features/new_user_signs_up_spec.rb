@@ -18,6 +18,7 @@ feature 'Unauthenticated user signs up', %Q{
   end
 
   scenario 'fill all required fields' do
+    Capybara.match = :first
     visit root_path
     click_link 'Sign Up'
 
@@ -40,16 +41,13 @@ feature 'Unauthenticated user signs up', %Q{
 
     click_button 'Sign Up'
 
-    expect(page).to have_content "First name can't be blank"
-    expect(page).to have_content "Last name can't be blank"
-    expect(page).to have_content "Username can't be blank"
-    expect(page).to have_content "Email can't be blank"
-    expect(page).to have_content "Password can't be blank"
+    expect(page).to have_content "can't be blank"
     expect(page).to_not have_content "Sign Out"
     expect(page).to_not have_content "Edit Profile"
   end
 
   scenario 'invalid email' do
+    Capybara.match = :first
     visit new_user_registration_path
 
     fill_in 'First Name', with: @user1.first_name
@@ -61,10 +59,11 @@ feature 'Unauthenticated user signs up', %Q{
 
     click_button 'Sign Up'
 
-    expect(page).to have_content "Email is invalid"
+    expect(page).to have_content "Emailis invalid"
   end
 
   scenario 'invalid password confirmation' do
+    Capybara.match = :first
     visit new_user_registration_path
 
     fill_in 'First Name', with: @user1.first_name
@@ -76,7 +75,7 @@ feature 'Unauthenticated user signs up', %Q{
 
     click_button 'Sign Up'
 
-    expect(page).to have_content "Password confirmation doesn't match"
+    expect(page).to have_content "Password Confirmationdoesn't match"
   end
 
 end

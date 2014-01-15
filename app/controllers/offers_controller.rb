@@ -1,6 +1,6 @@
 class OffersController < ApplicationController
   def index
-    @offers = @listing.offers.where(filter)
+    @offers = Offer.where(filter)
   end
 
   def create
@@ -37,3 +37,4 @@ class OffersController < ApplicationController
     end
   end
 end
+

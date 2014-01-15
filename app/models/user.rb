@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  validates_presence_of :first_name, :last_name, :email, :password, :username
+  validates_presence_of :first_name, :last_name, :email, :password, :username, :password_confirmation
   validates_uniqueness_of :username,
     case_insensitive: true
 
@@ -25,3 +25,4 @@ class User < ActiveRecord::Base
     inverse_of: :user,
     dependent: :destroy
 end
+

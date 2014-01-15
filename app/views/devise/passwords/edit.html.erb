@@ -1,16 +1,16 @@
-<h2>Change your password</h2>
+<div class="col-md-8 col-md-offset-2">
+  <h2>Change your password</h2>
 
-<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
-  <%= devise_error_messages! %>
-  <%= f.hidden_field :reset_password_token %>
+  <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: 'form-vertical' }) do |f| %>
+    <%= f.input :reset_password_token, as: :hidden %>
 
-  <div class="form-group"><%= f.label :password, "New password" %><br />
-  <%= f.password_field :password, autofocus: true, class: "form-control" %></div>
+    <%= f.input :password, label: "New Password", as: :password, autofocus: true %>
 
-  <div class="form-group"><%= f.label :password_confirmation, "Confirm new password" %><br />
-  <%= f.password_field :password_confirmation, class: "form-control" %></div>
+    <%= f.input :password_confirmation, label: "Confirm new password", as: :password %>
 
-  <div class="form-group"><%= f.submit "Change my password", class: "btn btn-default" %></div>
-<% end %>
+    <%= f.submit "Change my password", class: "btn btn-success" %>
+  <% end %>
 
-<%= render "devise/shared/links" %>
+  <%= render "devise/shared/links" %>
+</div>
+
