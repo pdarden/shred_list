@@ -1,4 +1,9 @@
-<%= link_to 'Back to listing', listing_path(@listing) %>
+<% if @equipment.pictures.first.id.present? %>
+  <%= link_to 'Back to listing', listing_path(@listing) %>
+<% else %>
+  <div class="alert alert-warning"><h1>You must upload at least 1 picture for this equipment!</h1></div>
+<% end %>
+
 <h1>Equipment Info</h1>
 
 <div class="col-md-4">
@@ -17,7 +22,8 @@
 </div>
 
 <div class="col-md-8">
-    <% @equipment.pictures.each do |picture| %>
+  <% @equipment.pictures.each do |picture| %>
+    <% if picture.id %>
       <div class="col-xs-6 col-md-4">
         <a href="#" class="thumbnail">
           <%= image_tag picture.image_url(:thumb).to_s %>
@@ -25,5 +31,6 @@
         </a>
       </div>
     <% end %>
+  <% end %>
 </div>
 
