@@ -33,5 +33,4 @@ ShredList::Application.configure do
     Bullet.enable = true
     Bullet.rails_logger = true
   end
-  config.active_record.auto_explain_threshold_in_seconds = 0.5
 end

@@ -41,8 +41,6 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 gem 'bootstrap-sass', '~> 3.0.3.0'
-gem 'haml'
-gem 'hirb'
 gem 'devise'
 gem 'simple_form'
 gem 'carrierwave'
@@ -51,6 +49,8 @@ gem 'mini_magick'
 gem "fog", "~> 1.3.1"
 gem 'kaminari'
 gem 'newrelic_rpm'
+gem "bootstrap-kaminari-views", "~> 0.0.3"
+gem 'ransack'
 
 group :test, :development do
   gem 'rspec-rails'

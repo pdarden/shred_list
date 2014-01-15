@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>ShredList</title>
-  <%= stylesheet_link_tag    "application", media: "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>ShredList</title>
+    <%= stylesheet_link_tag    "application", media: "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
 
-  <%= render 'shared/nav' %>
+    <%= render 'shared/nav' %>
 
-  <%= render 'shared/messages' %>
+    <%= render 'shared/messages' %>
 
-  <div class="container wrapper">
-    <%= yield %>
-  </div>
+    <div id ="st-container" class="st-container st-effect-1">
+      <div class="container wrapper">
+        <%= yield %>
+      </div>
+    </div>
 
-  <%= render 'shared/footer' %>
+    <%= render 'shared/footer' %>
 
-  <%= yield :extra_footer %>
-</body>
+    <%= yield :extra_footer %>
+  </body>
 </html>
 

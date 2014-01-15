@@ -3,6 +3,9 @@ ShredList::Application.routes.draw do
   root 'listings#index'
 
   resources :listings do
+    collection do
+      match 'search' => 'listings#search', via: [:get, :post], as: :search
+    end
     resources :equipment
     resources :offers, only: [:new, :destroy, :create]
   end
