@@ -6,28 +6,28 @@
   <div class="row">
     <div class="col-md-7">
       <h1><%= @listing.title %><small> by <%= link_to @listing.user.username, user_path(@listing.user)%></h1>
-      <p><strong>Description:</strong> <%= @listing.description %></p>
-      <% if !@listing.asking_price.nil? %>
-        <p><strong>Asking price:</strong> $<%= @listing.price_in_dollars %></p>
-      <% end %>
-      <% if !@listing.asking_items.nil? && @listing.trade%>
-        <p><strong>Asking items:</strong> <%= @listing.asking_items %></p>
-      <% end %>
-      <p><strong>Location:</strong> <%= @listing.state.try(:name) %></p>
+        <p><strong>Description:</strong> <%= @listing.description %></p>
+        <% if !@listing.asking_price.nil? %>
+          <p><strong>Asking price:</strong> $<%= @listing.price_in_dollars %></p>
+        <% end %>
+        <% if !@listing.asking_items.nil? && @listing.trade%>
+          <p><strong>Asking items:</strong> <%= @listing.asking_items %></p>
+        <% end %>
+        <p><strong>Location:</strong> <%= @listing.state.try(:name) %></p>
 
-      <%= render 'listings/equipments' %> 
+        <%= render 'listings/equipments' %> 
 
-      <% if @listing.owned_by?(current_user) %>
-        <%= link_to 'Edit Listing', edit_listing_path(@listing),  class: 'btn btn-info' %>
-        <%= link_to 'New Equipment', new_listing_equipment_path(@listing), class: 'btn btn-info' %>
-        <%= link_to 'Delete Listing', @listing, method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete-link' %><br>
-      <% end %>
-    </div>
+        <% if @listing.owned_by?(current_user) %>
+          <%= link_to 'Edit Listing', edit_listing_path(@listing),  class: 'btn btn-info' %>
+          <%= link_to 'New Equipment', new_listing_equipment_path(@listing), class: 'btn btn-info' %>
+          <%= link_to 'Delete Listing', @listing, method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete-link' %><br>
+        <% end %>
+      </div>
 
-    <div class="col-md-5">
-      <div id="carousel-generic" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-          <% @equipments.each_with_index do |equipment, index| %>
+      <div class="col-md-5">
+        <div id="carousel-generic" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+            <% @equipments.each_with_index do |equipment, index| %>
               <% equipment.pictures.each do |picture| %>
                 <div class="item <%= index == 0 && equipment.pictures.first == picture ? 'active' : '' %>">
                   <%= image_tag picture.image_url.to_s %>
@@ -37,35 +37,35 @@
                   </div>
                 </div>
               <% end %>
-          <% end %>
+            <% end %>
+          </div>
+          <a  class="left carousel-control" href="#carousel-generic" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+          </a>
+          <a class="right carousel-control" href="#carousel-generic" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+          </a>
         </div>
-        <a  class="left carousel-control" href="#carousel-generic" data-slide="prev">
-          <span class="glyphicon glyphicon-chevron-left"></span>
-        </a>
-        <a class="right carousel-control" href="#carousel-generic" data-slide="next">
-          <span class="glyphicon glyphicon-chevron-right"></span>
-        </a>
       </div>
     </div>
   </div>
-</div>
 
   <p><%= link_to 'Make An Offer', user_signed_in? ? '#' : new_user_registration_path, id: 'make_offer', class: "btn btn-primary" %></p>
 
-<div class="offers">
-  <%= render 'offers/form' %>
-</div>
+  <div class="offers">
+    <%= render 'offers/form' %>
+  </div>
 
   <%= render 'offers/offers' %>
 
-<%= content_for :extra_footer do %>
-  <script>
-    $(document).ready(function() {
-      $('#new_offer').toggle();
-      $('#make_offer').on("click", function(e) {
+  <%= content_for :extra_footer do %>
+    <script>
+      $(document).ready(function() {
         $('#new_offer').toggle();
+        $('#make_offer').on("click", function(e) {
+          $('#new_offer').toggle();
+        });
       });
-    });
-  </script>
-<% end %>
+    </script>
+  <% end %>
 

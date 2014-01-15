@@ -1,8 +1,12 @@
 /* --- Global Settings -- */
 body {
-  background-color: #f3efe0;
   padding-top: 70px;
   padding-bottom: 70px;
+  background: url('penny.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .navbar-right {
@@ -68,6 +72,10 @@ div.description {
 h3.title {
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.sort {
+  margin-left: 20px;
 }
 
 /* --- Sidebar Effects --*/
