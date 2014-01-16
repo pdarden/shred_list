@@ -1,31 +1,7 @@
 <nav class="st-menu st-effect-1" id="menu-1">
 <h2 class="icon icon-lab">Search</h2>
 <ul>
-  <%= search_form_for @q, url: search_listings_path, html: { method: :post } do |f| %>
-    <li>
-    <%= f.label :trade_eq, "Sell or Trade" %>
-    <%= f.select :trade_eq, options_for_select([["Sell",false], ["Trade",true]]), include_blank: true %>
-    </li>
-    <li>
-    <%= f.label :title_cont, "Title" %>
-    <%= f.text_field :title_cont %>
-    </li>
-    <li>
-    <%= f.label :state_name_cont, "State" %>
-    <%= f.select :state_id_eq, options_from_collection_for_select(State.all, "id", "name", @q.state_id_eq), include_blank: true %>
-    </li>
-    <li>
-    <%= f.label :equipment_brand_id_eq, "Brand" %>
-    <%= f.select :equipment_brand_id_eq, options_from_collection_for_select(Brand.all, "id", "name", @q.equipment_brand_id_eq), include_blank: true %>
-    </li>
-    <li>
-    <%= f.label :equipment_category_id_eq, "Category" %>
-    <%= f.select :equipment_category_id_eq, options_from_collection_for_select(Category.all, "id", "name", @q.equipment_category_id_eq), include_blank: true %>
-    </li>
-    <li>
-    <%= f.submit "Find", class: 'btn btn-success' %>
-    </li>
-  <% end %>
+  <%= render 'listings/search_form' %>
 </ul>
 </nav>
 
@@ -65,7 +41,7 @@
     </div>
 
     <div class="col-md-7 col-md-offset-4">
-      <%= paginate @listings, theme: 'twitter-bootstrap-3', pagination_class: 'pagination-sm' %>
+      <%= paginate @listings, theme: 'twitter-bootstrap-3', pagination_class: 'pagination-sm pagination-center' %>
     </div>
   </div>
 </div>
