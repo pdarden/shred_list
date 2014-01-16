@@ -1,4 +1,13 @@
 <nav class="navbar navbar-default navbar-fixed-bottom"  role="navigation">
-    <p class="navbar-text">&copy;Shred List <%= Time.now.year %> | <%= link_to 'About Us', '#' %> | <%= link_to 'Contact Us', '#' %></p>
+<div class="container">
+  <p class="navbar-text">&copy;Shred List <%= Time.now.year %> | Get in touch  <a href="https://twitter.com/ParindaDarden" class="twitter-follow-button" data-show-count="false">Follow @ParindaDarden</a>
+  </p>
+</div>
 </nav>
+
+<%= content_for :extra_footer do %>
+  <script>
+    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+  </script>
+<% end %>
 
