@@ -1,0 +1,21 @@
+<div id="carousel-generic" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <% @equipments.each_with_index do |equipment, index| %>
+      <% equipment.pictures.each do |picture| %>
+        <div class="item <%= index == 0 && equipment.pictures.first == picture ? 'active' : '' %>">
+          <%= image_tag picture.image_url.to_s %>
+          <div class="carousel-caption">
+            <h3><%= equipment.brand.name %></h3>
+            <p>$<%= equipment.price_in_dollars %></p>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <a  class="left carousel-control" href="#carousel-generic" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+  </a>
+  <a class="right carousel-control" href="#carousel-generic" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+  </a>
+</div>
