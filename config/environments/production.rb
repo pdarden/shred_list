@@ -79,7 +79,7 @@ ShredList::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   # Emailing for Devise and Sendgrid
-  config.action_mailer.default_url_options = { :host => 'shred-list.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => 'shred-list.com' }
   ActionMailer::Base.smtp_settings = {
     :address => 'smtp.sendgrid.net',
     :port => '587',
