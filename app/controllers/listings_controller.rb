@@ -3,7 +3,6 @@ class ListingsController < ApplicationController
 
   def index
     @q = Listing.search(params[:q])
-
     @listings = @q.result
       .order('created_at DESC')
       .where(filter)
@@ -73,7 +72,7 @@ class ListingsController < ApplicationController
 
   def filter
     if params[:user_id]
-      { user_id: params[:user_id] }
+      { user_id: User.where(username: params[:user_id]) }
     else
       {}
     end

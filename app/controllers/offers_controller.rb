@@ -1,6 +1,7 @@
 class OffersController < ApplicationController
   def index
-    @offers = Offer.where(filter)
+    @user = User.where(username: params[:user_id]).includes(:offers).first
+    @offers = @user.offers
   end
 
   def create
