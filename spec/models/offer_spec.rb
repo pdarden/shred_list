@@ -9,4 +9,7 @@ describe Offer do
   it { should belong_to(:listing) }
 
   it { should have_many(:pictures).dependent(:destroy) }
+
+  it { should have_many(:replies).dependent(:destroy) }
+  it { should have_many(:replies).source(:senders) }
 end

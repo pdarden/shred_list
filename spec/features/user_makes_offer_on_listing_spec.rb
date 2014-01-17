@@ -33,6 +33,7 @@ feature 'User can make offers on listings', %Q{
   end
 
   scenario 'Authenticated user tries to make a public offer' do
+    Capybara.match = :first
     visit listing_path(listing)
     click_link 'Make An Offer'
     current_path.should == listing_path(listing)
@@ -41,6 +42,7 @@ feature 'User can make offers on listings', %Q{
     click_button 'Submit'
 
     current_path.should == listing_path(listing)
+    expect(page).to have_content 'Your offer was posted!'
     expect(page).to have_content offer1.description
     expect(page).to have_content user.username
     attach_file 'picture_image', Rails.root.join('spec/file_fixtures/sample_longboard.jpg')
@@ -48,8 +50,38 @@ feature 'User can make offers on listings', %Q{
     expect(Picture.last.image.url).to be_present
 
     expect(page).to have_content 'Make An Offer'
-    expect(page).to have_content 'Your offer was posted!'
     sign_out
+
+    sign_in_as(owner)
+    visit listing_path(listing)
+
+    expect(page).to have_content offer1.description
+    click_link 'Reply'
+    fill_in 'Description', with: 'Okay'
+    click_button 'Submit'
+
+    expect(page).to have_content offer1.description
+    expect(page).to have_content 'Okay'
+
+    sign_out
+
+    sign_in_as(user)
+    visit listing_path(listing)
+
+    expect(page).to have_content offer1.description
+    expect(page).to have_content 'Okay'
+    click_on 'Reply'
+    fill_in 'Description', with: 'Cool'
+    click_button 'Submit'
+
+    expect(page).to have_content offer1.description
+    expect(page).to have_content 'Okay'
+    expect(page).to have_content 'Cool'
+
+    sign_out
+
+    visit listing_path(listing)
+    expect(page).to have_content offer1.description
   end
 
   scenario 'Authenticated user tries to make a private offer' do

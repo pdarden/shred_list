@@ -9,16 +9,15 @@ class OffersController < ApplicationController
     @offer.user = current_user
 
     if @offer.save
-      redirect_to listing_path(@listing),
+      redirect_to listing_path(listing),
         flash: { success: "Your offer was posted!" }
-    else
-      render :new
     end
   end
 
   def destroy
     Offer.find(params[:id]).destroy
-    redirect_to listing_path(@listing)
+    redirect_to listing_path(listing),
+      flash: { success: "Your offer was deleted." }
   end
 
   private
@@ -27,7 +26,8 @@ class OffersController < ApplicationController
   end
 
   def offer_params
-    params.require(:offer).permit(:description, :private_message, :user_id, :listing_id)
+    params.require(:offer).permit(:description, :private_message, :user_id, :listing_id,
+                                 pictures_attributes: [:image])
   end
 
   def filter

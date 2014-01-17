@@ -34,8 +34,9 @@ body {
   max-height: 250px;
 }
 
-.slide-show {
-  min-height: 300px;
+.slide {
+  max-height: 400px;
+  max-width: 400px;
 }
 
 .carousel-caption {
@@ -76,6 +77,14 @@ h3.title {
 
 .sort {
   margin-left: 20px;
+}
+
+.offer-picture {
+  display: inline;
+}
+
+.right, .btn-reply {
+  float: right;
 }
 
 /* --- Sidebar Effects --*/

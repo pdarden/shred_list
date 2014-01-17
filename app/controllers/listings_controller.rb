@@ -21,6 +21,7 @@ class ListingsController < ApplicationController
     @offer = Offer.new
     @offers = @listing.offers
     @picture = Picture.new
+    @reply = Reply.new
     @equipments = @listing.equipment.map { |e| e if e.pictures.present? }
   end
 

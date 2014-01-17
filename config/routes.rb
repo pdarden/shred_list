@@ -16,6 +16,7 @@ ShredList::Application.routes.draw do
 
   resources :offers, only: [] do
     resources :pictures, only: [:new, :destroy, :create]
+    resources :replies, only: [:create, :destroy]
   end
 
   resources :users, only: [ :show ] do
