@@ -17,5 +17,7 @@
 //= require jquery_nested_form
 //= require sidebar_effects
 //= require classie
+//= require jquery.vmap
+//= require jquery.vmap.usa
 
 

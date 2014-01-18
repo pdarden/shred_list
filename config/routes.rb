@@ -1,4 +1,5 @@
 ShredList::Application.routes.draw do
+  get "maps/index"
   devise_for :users
   root 'listings#index'
 
