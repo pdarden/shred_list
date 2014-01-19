@@ -10,7 +10,10 @@
     selectedColor: '#666666',
     enableZoom: false,
     showTooltip: true,
-    selectedRegion: null
+    selectedRegion: null,
+    onLabelShow: function(event, label, code) {
+      label.text(code.toUpperCase() + ": number Listings");
+    }
   });
 </script>
 
