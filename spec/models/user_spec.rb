@@ -24,4 +24,5 @@ describe User do
 
   it { should have_many(:listings).dependent(:destroy) }
 
+  it { should have_many(:replies).dependent(:destroy) }
 end

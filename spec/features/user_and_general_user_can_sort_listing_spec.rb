@@ -22,7 +22,7 @@ feature "User can sort listings", %Q{
     posting = Listing.create(title: "Find Me!", user_id: user.id, description: 'YAY', trade: true, asking_price: 10000, asking_items: "Your soul", state_id: newyork.id)
     Equipment.create(original_price: 20000, brand_id: brand.id, category_id: category.id, listing_id: posting.id )
     visit root_path
-    click_on 'Sort Results'
+    click_on 'Search'
     select 'Trade', from: 'q_trade_eq'
     select newyork.name, from: 'q_state_id_eq'
     select brand.name, from: 'q_equipment_brand_id_eq'

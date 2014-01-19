@@ -1,4 +1,4 @@
-<%= simple_form_for([@listing, @equipment]) do |f| %>
+<%= simple_form_for([@listing, @equipment], html: { class: 'form-vertical' }) do |f| %>
   <%= f.association :brand, collection: Brand.all %>
   <%= f.association :category, collection: Category.all %>
   <%= f.association :riding_style, collection: RidingStyle.all %>

@@ -26,5 +26,8 @@ class User < ActiveRecord::Base
   has_many :listings,
     inverse_of: :user,
     dependent: :destroy
+  has_many :replies,
+    inverse_of: :sender,
+    dependent: :destroy
 end
 

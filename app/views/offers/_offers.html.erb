@@ -1,14 +1,45 @@
 <% @offers.each do |offer| %>
   <% if (offer.private_message == true && !user_signed_in?) || (offer.private_message == true && current_user.id != offer.user_id && current_user.id != @listing.user_id) %>
     <div class="hidden">
-  <% else %>
-    <div class="well well-lg">
-  <% end %>
+    <% else %>
+      <div class="well well-lg">
+      <% end %>
       <strong>By: </strong> <%= link_to offer.user.try(:username), user_path(offer.user_id) %><br>
       <strong>Desctiption:</strong> <%= offer.try(:description) %><br>
-      <% offer.pictures.each do |picture| %>
-        <%= picture.image_url(:thumb).to_s %>
+      <strong>Posted on:</strong> <%= offer.created_at.strftime("%b/%e/%y %r") %><br>
+      <% if offer.pictures.present? %>
+        <% offer.pictures.each do |picture| %>
+          <%= image_tag picture.image_url(:thumb).to_s %>
+          <%= link_to 'Delete', [offer, picture], method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete-link' %>
+        <% end %>
+      <% end %>
+      <% if (user_signed_in? && (current_user.id == offer.user_id)) %>
+        <%= simple_form_for([offer, @picture]) do |f| %>
+          <%= f.input :image, as: :file %>
+          <%= f.submit "Add Picture", class: 'btn btn-primary' %>
+        <% end %>
+        <%= link_to 'Delete Offer', [@listing, offer], method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete-link' %>
+      <% end %>
+      <% if (user_signed_in? && ((current_user.id == offer.user_id) || (current_user.id == @listing.user_id))) %>
+        <%= link_to 'Reply', '#', id: 'make_reply', class: 'btn btn-success btn-reply' %><br>
+        <h4 class="text-center">These replies are private</h4>
+        <div>
+          <%= simple_form_for([offer, @reply]) do |f| %>
+            <div class="well">
+              <%= f.input :body, label: '', as: :text %>
+              <%= f.submit "Submit", class: 'btn btn-success' %>
+            </div>
+          <% end %>
+        </div>
+        <% offer.replies.each do |reply| %>
+          <div class="well col-md-offset-2">
+            <strong>From:</strong> <%= link_to User.find(reply.sender_id).username.capitalize, user_path(reply.sender_id) %> <% if current_user.id == reply.sender_id %>
+              <%= link_to 'delete', [offer, reply], method: :delete, data: { confirm: 'Are you sure?' }, class: 'right delete-link' %>
+            <% end %><br>
+            <%= reply.try(:body) %><br>
+          </div>
+        <% end %>
       <% end %>
     </div>
-<% end %>
+  <% end %>
 

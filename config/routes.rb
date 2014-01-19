@@ -1,4 +1,5 @@
 ShredList::Application.routes.draw do
+  get "maps/index"
   devise_for :users
   root 'listings#index'
 
@@ -16,6 +17,7 @@ ShredList::Application.routes.draw do
 
   resources :offers, only: [] do
     resources :pictures, only: [:new, :destroy, :create]
+    resources :replies, only: [:create, :destroy]
   end
 
   resources :users, only: [ :show ] do
