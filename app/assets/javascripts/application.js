@@ -19,5 +19,5 @@
 //= require classie
 //= require jquery.vmap
 //= require jquery.vmap.usa
-
+//= require offcanvas
 
