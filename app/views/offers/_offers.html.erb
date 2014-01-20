@@ -31,13 +31,15 @@
             </div>
           <% end %>
         </div>
-        <% offer.replies.each do |reply| %>
-          <div class="well col-md-offset-2">
-            <strong>From:</strong> <%= link_to User.find(reply.sender_id).username.capitalize, user_path(reply.sender_id) %> <% if current_user.id == reply.sender_id %>
-              <%= link_to 'delete', [offer, reply], method: :delete, data: { confirm: 'Are you sure?' }, class: 'right delete-link' %>
-            <% end %><br>
-            <%= reply.try(:body) %><br>
-          </div>
+        <% if offer.replies.present? %>
+          <% offer.replies.each do |reply| %>
+            <div class="well col-md-offset-2">
+              <strong>From:</strong> <%= link_to User.find(reply.sender_id).username.capitalize, user_path(reply.sender_id) %> <% if current_user.id == reply.sender_id %>
+                <%= link_to 'delete', [offer, reply], method: :delete, data: { confirm: 'Are you sure?' }, class: 'right delete-link' %>
+              <% end %><br>
+              <%= reply.try(:body) %><br>
+            </div>
+          <% end %>
         <% end %>
       <% end %>
     </div>
