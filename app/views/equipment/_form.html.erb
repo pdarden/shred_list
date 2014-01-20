@@ -1,3 +1,4 @@
+<div class="wrapper">
 <%= simple_form_for([@listing, @equipment], html: { class: 'form-vertical' }) do |f| %>
   <%= f.association :brand, collection: Brand.all %>
   <%= f.association :category, collection: Category.all %>
@@ -5,4 +6,5 @@
   <%= f.input :price_in_dollars, label: 'Original Price' %>
   <%= f.submit @equipment.new_record? ? "Create Equipment" : "Update Equipment", class: 'btn btn-primary' %>
 <% end %>
+</div>
 
