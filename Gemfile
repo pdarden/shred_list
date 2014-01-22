@@ -51,6 +51,7 @@ gem 'kaminari'
 gem 'newrelic_rpm'
 gem "bootstrap-kaminari-views", "~> 0.0.3"
 gem 'ransack'
+gem 'friendly_id', '~> 5.0.0'
 
 group :test, :development do
   gem 'rspec-rails'

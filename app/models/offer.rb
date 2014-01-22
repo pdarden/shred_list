@@ -8,5 +8,9 @@ class Offer < ActiveRecord::Base
     as: :picturable,
     dependent: :destroy
   accepts_nested_attributes_for :pictures, allow_destroy: true
+  has_many :replies,
+    source: :senders,
+    dependent: :destroy
+
 end
 

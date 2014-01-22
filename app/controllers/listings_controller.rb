@@ -3,7 +3,6 @@ class ListingsController < ApplicationController
 
   def index
     @q = Listing.search(params[:q])
-
     @listings = @q.result
       .order('created_at DESC')
       .where(filter)
@@ -22,7 +21,8 @@ class ListingsController < ApplicationController
     @offer = Offer.new
     @offers = @listing.offers
     @picture = Picture.new
-    @equipments = @listing.equipment.map { |e| e if e.pictures.present? }
+    @reply = Reply.new
+    @equipments = @listing.equipment
   end
 
   def new
@@ -73,7 +73,7 @@ class ListingsController < ApplicationController
 
   def filter
     if params[:user_id]
-      { user_id: params[:user_id] }
+      { user_id: User.where(username: params[:user_id]) }
     else
       {}
     end

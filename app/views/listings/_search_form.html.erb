@@ -1,25 +1,27 @@
 <%= search_form_for @q, url: search_listings_path, html: { method: :post } do |f| %>
   <li>
-  <%= f.label :trade_eq, "Sell or Trade" %>
+  <%= f.label :trade_eq, "Sell or Trade" %><br>
   <%= f.select :trade_eq, options_for_select([["Sell",false], ["Trade",true]]), include_blank: true %>
   </li>
   <li>
-  <%= f.label :title_cont, "Title" %>
+  <%= f.label :title_cont, "Title" %><br>
   <%= f.text_field :title_cont %>
   </li>
   <li>
-  <%= f.label :state_name_cont, "State" %>
+  <%= f.label :state_name_cont, "State" %><br>
   <%= f.select :state_id_eq, options_from_collection_for_select(State.all, "id", "name", @q.state_id_eq), include_blank: true %>
   </li>
   <li>
-  <%= f.label :equipment_brand_id_eq, "Brand" %>
+  <%= f.label :equipment_brand_id_eq, "Brand" %><br>
   <%= f.select :equipment_brand_id_eq, options_from_collection_for_select(Brand.all, "id", "name", @q.equipment_brand_id_eq), include_blank: true %>
   </li>
   <li>
-  <%= f.label :equipment_category_id_eq, "Category" %>
+  <%= f.label :equipment_category_id_eq, "Category" %><br>
   <%= f.select :equipment_category_id_eq, options_from_collection_for_select(Category.all, "id", "name", @q.equipment_category_id_eq), include_blank: true %>
   </li>
+  <br>
   <li>
   <%= f.submit "Find", class: 'btn btn-success' %>
   </li>
 <% end %>
+

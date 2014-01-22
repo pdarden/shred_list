@@ -7,17 +7,28 @@ class PicturesController < ApplicationController
   def create
     @picture = picturable.pictures.new(picture_params)
     if @picture.save
+      if @picture.picturable_type == 'Equipment'
       redirect_to listing_equipment_path(@picturable.listing, @picturable),
         flash: { success: "You added a picture!" }
+      else
+        redirect_to listing_path(@picturable.listing),
+          flash: { success: "You added a picture!" }
+      end
     else
       render :new
     end
   end
 
   def destroy
-    @picturable.pictures.find(params[:id]).destroy
-    redirect_to listing_equipment_path(@picturable.listing, @picturable),
-      notice: "Picture was successfully deleted."
+    @picture = @picturable.pictures.find(params[:id])
+    @picture.destroy
+    if @picture.picturable_type == 'Equipment'
+      redirect_to listing_equipment_path(@picturable.listing, @picturable),
+        notice: "Picture was successfully deleted."
+    else
+      redirect_to listing_path(@picturable.listing),
+        notice: "Picture was successfully deleted."
+    end
   end
 
   private

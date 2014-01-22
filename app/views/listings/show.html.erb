@@ -3,9 +3,9 @@
     <%= link_to 'My Listings', user_listings_path(current_user) %> | 
   <% end %>
   <%= link_to 'All Listings', listings_path %></p>
-  <div class="row">
+  <div class="row ind-listing">
     <div class="col-md-7">
-      <h1><%= @listing.title %><small> by <%= link_to @listing.user.username, user_path(@listing.user)%></h1>
+      <h1><%= @listing.title %><br><small> by <%= link_to @listing.user.username, user_path(@listing.user)%> on <%= @listing.created_at.strftime("%m/%e/%y") %></small></h1>
         <p><strong>Description:</strong> <%= @listing.description %></p>
         <% if !@listing.asking_price.nil? %>
           <p><strong>Asking price:</strong> $<%= @listing.price_in_dollars %></p>
@@ -25,27 +25,7 @@
       </div>
 
       <div class="col-md-5">
-        <div id="carousel-generic" class="carousel slide" data-ride="carousel">
-          <div class="carousel-inner">
-            <% @equipments.each_with_index do |equipment, index| %>
-              <% equipment.pictures.each do |picture| %>
-                <div class="item <%= index == 0 && equipment.pictures.first == picture ? 'active' : '' %>">
-                  <%= image_tag picture.image_url.to_s %>
-                  <div class="carousel-caption">
-                    <h3><%= equipment.brand.name %></h3>
-                    <p>$<%= equipment.price_in_dollars %></p>
-                  </div>
-                </div>
-              <% end %>
-            <% end %>
-          </div>
-          <a  class="left carousel-control" href="#carousel-generic" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left"></span>
-          </a>
-          <a class="right carousel-control" href="#carousel-generic" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right"></span>
-          </a>
-        </div>
+        <%= render 'listings/carousel' %>
       </div>
     </div>
   </div>
@@ -64,6 +44,10 @@
         $('#new_offer').toggle();
         $('#make_offer').on("click", function(e) {
           $('#new_offer').toggle();
+        });
+        $('#new_reply').toggle();
+        $('#make_reply').on("click", function(e) {
+          $('#new_reply').toggle();
         });
       });
     </script>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140110193841) do
+ActiveRecord::Schema.define(version: 20140117183717) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,16 @@ ActiveRecord::Schema.define(version: 20140110193841) do
 
   create_table "categories", force: true do |t|
     t.string   "name",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "contact_forms", force: true do |t|
+    t.string   "first_name",  null: false
+    t.string   "last_name",   null: false
+    t.string   "email",       null: false
+    t.string   "subject",     null: false
+    t.text     "description", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -69,6 +79,14 @@ ActiveRecord::Schema.define(version: 20140110193841) do
   end
 
   add_index "pictures", ["picturable_id", "picturable_type"], name: "index_pictures_on_picturable_id_and_picturable_type", using: :btree
+
+  create_table "replies", force: true do |t|
+    t.integer  "offer_id",   null: false
+    t.integer  "sender_id",  null: false
+    t.text     "body",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "riding_styles", force: true do |t|
     t.string   "name",       null: false
