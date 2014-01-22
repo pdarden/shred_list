@@ -8,7 +8,7 @@
           <div class="caption">
             <h3 class="title"><%= listing.try(:title) %></h3>
             <div class="description"><p><%= listing.try(:description) %></p></div>
-            <p class="detail"><strong><%= link_to listing.user.try(:username).capitalize, user_path(listing.user) %></strong> from <strong><%= listing.state_name %></strong> is <strong><%= listing.trade ? "trading" : "selling" %></strong><br>
+            <p class="detail"><strong><%= link_to listing.username, user_path(listing.user) %></strong> from <strong><%= listing.state_name %></strong> is <strong><%= listing.trade ? "trading" : "selling" %></strong><br>
             <strong>Category</strong>:
             <% listing.categories.each do |category| %>
               <%= category.name %><%= "," unless category == listing.categories.last %>

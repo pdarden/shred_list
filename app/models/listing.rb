@@ -60,5 +60,9 @@ class Listing < ActiveRecord::Base
   def user_id
     self.user.id
   end
+
+  def username
+    user.username.capitalize
+  end
 end
 
