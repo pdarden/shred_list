@@ -10,7 +10,22 @@
     selectedColor: '#666666',
     enableZoom: false,
     showTooltip: true,
-    selectedRegion: null
+    selectedRegion: null,
+    onLabelShow: function(event, label, code) {
+      var state = $(label).text();
+      var count = (counts[state] || 0);
+      label.text(state + ": " + count + " Listing" + (count === 1 ? "" : "s"));
+    },
+    onRegionClick: function(element, code, region) {
+          var message = 'You clicked "'
+              + region 
+              + '" which has the code: '
+              + code.toUpperCase();
+
+       document.location.href='/listings/search?q[state_id_eq]=' + states[region];
+      }
   });
+  var counts = <%= raw @counts.to_json %>;
+  var states = <%= raw @states.to_json %>;
 </script>
 
