@@ -33,10 +33,7 @@ class Listing < ActiveRecord::Base
   end
 
   def has_image?
-    self.each do |equip|
-      next if equip.pictures.nil?
-      equip.pictures.first.image_url
-    end
+    Picture.where(picturable_id: self.id).count > 0
   end
 
   def equipment_image
