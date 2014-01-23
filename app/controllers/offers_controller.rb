@@ -7,8 +7,10 @@ class OffersController < ApplicationController
   def create
     @offer = listing.offers.new(offer_params)
     @offer.user = current_user
+    @user = @offer.listing.user
 
     if @offer.save
+      OfferNotification.make_offer(@user).deliver
       redirect_to listing_path(listing),
         flash: { success: "Your offer was posted!" }
     end

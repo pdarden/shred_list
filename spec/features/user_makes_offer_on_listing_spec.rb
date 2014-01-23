@@ -12,7 +12,7 @@ feature 'User can make offers on listings', %Q{
   # * I can set it as private between me and the lister.
   # * I can add pictures of equipment I want to trade.
 
-  let(:owner) { FactoryGirl.create(:user) }
+  let(:owner) { FactoryGirl.create(:user, email: 'sendmeanoffer@me.com') }
   let(:user) { FactoryGirl.create(:user) }
   let(:listing) { FactoryGirl.create(:listing, user_id: owner.id, state_id: state.id) }
   let(:state) { FactoryGirl.create(:state) }
@@ -34,6 +34,8 @@ feature 'User can make offers on listings', %Q{
 
   scenario 'Authenticated user tries to make a public offer' do
     Capybara.match = :first
+    ActionMailer::Base.deliveries = []
+
     visit listing_path(listing)
     click_link 'Make An Offer'
     current_path.should == listing_path(listing)
@@ -48,6 +50,11 @@ feature 'User can make offers on listings', %Q{
     attach_file 'picture_image', Rails.root.join('spec/file_fixtures/sample_longboard.jpg')
     click_button 'Add Picture'
     expect(Picture.last.image.url).to be_present
+
+    expect(ActionMailer::Base.deliveries.size).to eq(1)
+    last_email = ActionMailer::Base.deliveries.last
+    expect(last_email).to have_subject('Someone made an offer on your listing!')
+    expect(last_email).to deliver_to(owner.email)
 
     expect(page).to have_content 'Make An Offer'
     sign_out
