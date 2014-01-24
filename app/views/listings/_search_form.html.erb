@@ -8,7 +8,7 @@
   <%= f.text_field :title_cont %>
   </li>
   <li>
-  <%= f.label :state_name_cont, "State" %><br>
+  <%= f.label :state_name_cont, "Location" %><br>
   <%= f.select :state_id_eq, options_from_collection_for_select(State.all, "id", "name", @q.state_id_eq), include_blank: true %>
   </li>
   <li>
