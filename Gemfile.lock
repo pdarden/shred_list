@@ -147,6 +147,8 @@ GEM
       callsite
       rack-contrib
       railties
+    metamagic (2.0.6)
+      rails (>= 3.0.0)
     method_source (0.8.2)
     mime-types (1.25.1)
     mini_magick (3.7.0)
@@ -322,6 +324,7 @@ DEPENDENCIES
   launchy
   mailcatcher
   meta_request
+  metamagic
   mini_magick
   nested_form
   newrelic_rpm
