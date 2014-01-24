@@ -1,6 +1,5 @@
 <div id="carousel-generic" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
-    <% if @listing.has_image? %>
       <% @equipments.each_with_index do |equipment, index| %>
         <% equipment.pictures.each do |picture| %>
           <div class="item <%= index == 0 && equipment.pictures.first == picture ? 'active' : '' %>">
@@ -12,11 +11,6 @@
           </div>
         <% end %>
       <% end %>
-    <% else %>
-      <div class="item active">
-        <%= image_tag 'fallback/default.jpg' %>
-      </div>
-    <% end %>
   </div>
   <a  class="left carousel-control" href="#carousel-generic" data-slide="prev">
     <span class="glyphicon glyphicon-chevron-left"></span>
