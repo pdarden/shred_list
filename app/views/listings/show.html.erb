@@ -1,3 +1,8 @@
+<%
+  meta title: @listing.title + ' | Shred List',
+       description: @listing.description
+%>
+
 <div class="post">
   <p class='listings-nav'><% if user_signed_in? && @listing.owned_by?(current_user) %>
     <%= link_to 'My Listings', user_listings_path(current_user) %> | 
