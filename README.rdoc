@@ -1,28 +1,6 @@
-== README
+== Shred List
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Shred List is a place where people can sell and trade their longboard equipments. This website was built during my time at Launch Academy, 10-weeks intensive Ruby on Rails web development bootcamp in Boston.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+====Suggestions or Questions?
+https://twitter.com/ParindaDarden
