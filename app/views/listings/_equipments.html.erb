@@ -17,7 +17,7 @@
     <tr>
     <td><%= equipment.brand.try(:name) %></td>
     <td><%= equipment.category.try(:name) %></td>
-    <td>$<%= equipment.price_in_dollars %></td>
+    <td><%= @listing.currency_symbol %> <%= equipment.price_in_dollars %> (<%= @listing.currency_code %>)</td>
     <td><%= equipment.riding_style.try(:name) %></td>
         <% if @listing.owned_by?(current_user) %>
           <td><%= link_to 'Show', listing_equipment_path(@listing, equipment), class: 'btn btn-default btn-xs' %></td>
