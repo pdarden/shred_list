@@ -6,7 +6,7 @@
             <%= image_tag picture.image_url.to_s %>
             <div class="carousel-caption">
               <h3><%= equipment.brand.name %></h3>
-              <p>$<%= equipment.price_in_dollars %></p>
+              <p><%= @listing.currency_symbol %> <%= equipment.price_in_dollars %></p>
             </div>
           </div>
         <% end %>
