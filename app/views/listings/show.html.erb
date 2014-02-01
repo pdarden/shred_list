@@ -13,7 +13,7 @@
       <h1><%= @listing.title %><br><small> by <%= link_to @listing.user.username, user_path(@listing.user)%> on <%= @listing.created_at.strftime("%m/%e/%y") %></small></h1>
         <p><strong>Description:</strong> <%= @listing.description %></p>
         <% if !@listing.asking_price.nil? %>
-          <p><strong>Asking price:</strong> $<%= @listing.price_in_dollars %></p>
+          <p><strong>Asking price:</strong> <%= @listing.currency_symbol %> <%= @listing.price_in_dollars %> (<%= @listing.currency_code %>)</p>
         <% end %>
         <% if !@listing.asking_items.nil? && @listing.trade%>
           <p><strong>Asking items:</strong> <%= @listing.asking_items %></p>

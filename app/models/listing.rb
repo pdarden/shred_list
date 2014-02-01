@@ -62,6 +62,14 @@ class Listing < ActiveRecord::Base
     user.username.capitalize
   end
 
+  def currency_code
+    currencies[state.name][0]
+  end
+
+  def currency_symbol
+    currencies[state.name][1]
+  end
+
   def currencies
     {
       "Alaska" => ['USD', '$'],

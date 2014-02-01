@@ -28,16 +28,6 @@ ActiveRecord::Schema.define(version: 20140117183717) do
     t.datetime "updated_at"
   end
 
-  create_table "contact_forms", force: true do |t|
-    t.string   "first_name",  null: false
-    t.string   "last_name",   null: false
-    t.string   "email",       null: false
-    t.string   "subject",     null: false
-    t.text     "description", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "equipment", force: true do |t|
     t.integer  "brand_id"
     t.integer  "category_id"
